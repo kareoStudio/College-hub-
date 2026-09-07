@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.kareostudeo" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.kareostudio" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>College Hub</name>
     <description>College Hub - Your one-stop college app</description>
     <author email="dev@kareostudio.com" href="https://kareostudio.com">Kareo Studio</author>
@@ -44,7 +44,7 @@
     <icon src="res/icon.png" />
     
     <platform name="android">
-        <!-- Modern Scheme (Fixes file:/// CORS & Module Timeout) -->
+        <!-- Modern Scheme (Fixes file:/// CORS & Timeout) -->
         <preference name="scheme" value="https" />
         <preference name="hostname" value="localhost" />
         <preference name="loadUrlTimeoutValue" value="120000" />
@@ -56,16 +56,12 @@
         <icon src="res/icon.png" density="xxhdpi" />
         <icon src="res/icon.png" density="xxxhdpi" />
         
-        <!-- FILE PERMISSIONS -->
+        <!-- Only Android 13+ Granular Permissions (No duplicates with plugins) -->
         <config-file target="AndroidManifest.xml" parent="/*" xmlns:android="http://schemas.android.com/apk/res/android">
             <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
             <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
             <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
-            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
-            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
             <uses-permission android:name="android.permission.CAMERA" />
-            <uses-permission android:name="android.permission.INTERNET" />
-            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
         </config-file>
     </platform>
     
