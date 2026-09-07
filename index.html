@@ -252,6 +252,10 @@
       line-height: 1.5;
       overflow-x: hidden;
       min-height: 100vh;
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
     }
 
     button, input, select, textarea {
@@ -4889,7 +4893,7 @@
 
     // Run startup
     initApp();
-    <script src="cordova.js">
   </script>
+  <script src="cordova.js"></script>
 </body>
 </html>
