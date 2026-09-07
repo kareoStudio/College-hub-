@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.kareostudeo" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>College Hub</name>
+    <description>College Hub - Your one-stop college app</description>
+    <author email="dev@kareostudeo.com" href="https://kareostudeo.com">Kareo Studio</author>
+    
+    <!-- Content -->
+    <content src="index.html" />
+    
+    <!-- Allow navigation -->
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    
+    <!-- Android preferences -->
+    <preference name="android-minSdkVersion" value="22" />
+    <preference name="android-targetSdkVersion" value="33" />
+    <preference name="android-compileSdkVersion" value="33" />
+    <preference name="AndroidXEnabled" value="true" />
+    
+    <!-- WebView settings -->
+    <preference name="Fullscreen" value="false" />
+    <preference name="Orientation" value="default" />
+    <preference name="BackgroundColor" value="0xFFFFFFFF" />
+    <preference name="KeepRunning" value="true" />
+    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="FadeSplashScreenDuration" value="500" />
+    <preference name="ShowSplashScreenSpinner" value="true" />
+    
+    <!-- Icon -->
+    <icon src="icon.png" />
+    
+    <!-- Platform: Android -->
+    <platform name="android">
+        <icon src="icon.png" density="ldpi" />
+        <icon src="icon.png" density="mdpi" />
+        <icon src="icon.png" density="hdpi" />
+        <icon src="icon.png" density="xhdpi" />
+        <icon src="icon.png" density="xxhdpi" />
+        <icon src="icon.png" density="xxxhdpi" />
+        
+        <splash src="icon.png" density="land-hdpi" />
+        <splash src="icon.png" density="land-ldpi" />
+        <splash src="icon.png" density="land-mdpi" />
+        <splash src="icon.png" density="land-xhdpi" />
+        <splash src="icon.png" density="land-xxhdpi" />
+        <splash src="icon.png" density="land-xxxhdpi" />
+        <splash src="icon.png" density="port-hdpi" />
+        <splash src="icon.png" density="port-ldpi" />
+        <splash src="icon.png" density="port-mdpi" />
+        <splash src="icon.png" density="port-xhdpi" />
+        <splash src="icon.png" density="port-xxhdpi" />
+        <splash src="icon.png" density="port-xxxhdpi" />
+    </platform>
+    
+    <!-- Plugins -->
+    <plugin name="cordova-plugin-whitelist" source="npm" />
+    <plugin name="cordova-plugin-network-information" source="npm" />
+    <plugin name="cordova-plugin-splashscreen" source="npm" />
+    <plugin name="cordova-plugin-statusbar" source="npm" />
+    
+    <!-- Enable webview -->
+    <preference name="loadUrlTimeoutValue" value="70000" />
+</widget>
