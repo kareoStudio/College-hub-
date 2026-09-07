@@ -52,25 +52,31 @@ jobs:
       
       - name: Setup Cordova Project & Copy Files
         run: |
-          cordova create college-hub com.kareostudeo "College Hub"
+          # 1. Create project with matching package name
+          cordova create college-hub com.kareostudio "College Hub"
+          
+          # 2. Copy config.xml and icon
           cp config.xml college-hub/config.xml
-          cp index.html college-hub/www/index.html
           mkdir -p college-hub/res
-          cp icon.png college-hub/res/icon.png || echo "icon.png not found, skipping"
+          [ -f icon.png ] && cp icon.png college-hub/res/icon.png || echo "icon.png not found, skipping"
+          
+          # 3. Copy index.html and main.html (agar redirect trick use kar rahe ho)
+          cp index.html college-hub/www/index.html
+          [ -f main.html ] && cp main.html college-hub/www/main.html || echo "main.html not present"
           
           cd college-hub
           cordova platform add android@13.0.0
           
-          # File upload ke liye plugins
+          # 4. Plugins required for College Hub
+          cordova plugin add cordova-plugin-network-information
+          cordova plugin add cordova-plugin-statusbar
           cordova plugin add cordova-plugin-file
           cordova plugin add cordova-plugin-filepath
           cordova plugin add cordova-plugin-filechooser
           cordova plugin add cordova-plugin-android-permissions
           
-          echo "=== www folder ==="
+          echo "=== www files copied ==="
           ls -la www/
-          echo "=== res folder ==="
-          ls -la res/
       
       - name: Build Debug APK
         env:
@@ -95,7 +101,7 @@ jobs:
           body: |
             ## College Hub APK
             - App Name: College Hub
-            - Package: com.kareostudeo
+            - Package: com.kareostudio
             - Target SDK: 34 (Android 14)
             - Build Date: ${{ github.event.head_commit.timestamp }}
         env:
