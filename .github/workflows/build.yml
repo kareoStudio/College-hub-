@@ -7,7 +7,6 @@ on:
     branches: [ main, master ]
   workflow_dispatch:
 
-# GitHub release create karne ki permission
 permissions:
   contents: write
 
@@ -16,36 +15,29 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      # Step 1: Checkout code
       - name: Checkout Repository
         uses: actions/checkout@v4
       
-      # Step 2: Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
       
-      # Step 3: Setup Java 17
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
       
-      # Step 4: Setup Android SDK
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
       
-      # Step 5: Install Android Build Tools 34.0.0
       - name: Install Android Build Tools 34.0.0
         run: |
           export ANDROID_HOME=$ANDROID_SDK_ROOT
           yes | sdkmanager --licenses || true
           sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
-          sdkmanager --list | grep "build-tools"
       
-      # Step 6: Install Gradle 8.0 (Cordova Android 13 compatible)
       - name: Install Gradle 8.0
         run: |
           sudo rm -rf /usr/share/gradle-*
@@ -55,38 +47,31 @@ jobs:
           sudo ln -sf /opt/gradle-8.0/bin/gradle /usr/local/bin/gradle
           gradle --version
       
-      # Step 7: Install Cordova
       - name: Install Cordova
         run: npm install -g cordova
       
-      # Step 8: Setup Cordova Project & Copy Files (IMPORTANT: pehle files, phir platform add)
       - name: Setup Cordova Project & Copy Files
         run: |
           cordova create college-hub com.kareostudeo "College Hub"
-          
-          # Pehle config copy karo taaki manifest sahi bane
           cp config.xml college-hub/config.xml
-          
-          # HTML files copy karo
           cp index.html college-hub/www/index.html
-          
-          # Icon ke liye folder banao
           mkdir -p college-hub/res
           cp icon.png college-hub/res/icon.png || echo "icon.png not found, skipping"
           
-          # Ab platform add karo
           cd college-hub
           cordova platform add android@13.0.0
           
-          # File upload ke liye plugin install karo
+          # File upload ke liye plugins
           cordova plugin add cordova-plugin-file
+          cordova plugin add cordova-plugin-filepath
+          cordova plugin add cordova-plugin-filechooser
+          cordova plugin add cordova-plugin-android-permissions
           
           echo "=== www folder ==="
           ls -la www/
           echo "=== res folder ==="
           ls -la res/
       
-      # Step 9: Build Debug APK
       - name: Build Debug APK
         env:
           ANDROID_HOME: ${{ env.ANDROID_SDK_ROOT }}
@@ -94,14 +79,12 @@ jobs:
           cd college-hub
           cordova build android --debug
       
-      # Step 10: Upload APK Artifact
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: College-Hub-APK
           path: college-hub/platforms/android/app/build/outputs/apk/debug/app-debug.apk
       
-      # Step 11: Upload APK to GitHub Release (v2 use karo - v1 deprecated hai)
       - name: Upload to Release
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         uses: softprops/action-gh-release@v2
