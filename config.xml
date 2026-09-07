@@ -19,7 +19,7 @@
     <preference name="android-compileSdkVersion" value="34" />
     <preference name="AndroidXEnabled" value="true" />
     
-    <!-- Screen fitting -->
+    <!-- Screen fitting ke liye -->
     <preference name="Fullscreen" value="false" />
     <preference name="Orientation" value="default" />
     <preference name="DisallowOverscroll" value="true" />
@@ -27,7 +27,7 @@
     <preference name="BackgroundColor" value="0xFFFFFFFF" />
     <preference name="KeepRunning" value="true" />
     
-    <!-- Status bar -->
+    <!-- Status bar handle karega -->
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <preference name="StatusBarStyle" value="lightcontent" />
@@ -47,11 +47,23 @@
         <icon src="res/icon.png" density="xhdpi" />
         <icon src="res/icon.png" density="xxhdpi" />
         <icon src="res/icon.png" density="xxxhdpi" />
+        
+        <!-- FILE UPLOAD PERMISSIONS - Android 13+ ke liye -->
+        <config-file target="AndroidManifest.xml" parent="/*" xmlns:android="http://schemas.android.com/apk/res/android">
+            <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+            <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+            <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+            <uses-permission android:name="android.permission.CAMERA" />
+            <uses-permission android:name="android.permission.INTERNET" />
+        </config-file>
     </platform>
     
     <!-- Plugins -->
     <plugin name="cordova-plugin-network-information" source="npm" />
     <plugin name="cordova-plugin-statusbar" source="npm" />
+    <plugin name="cordova-plugin-file" source="npm" />
     
     <preference name="loadUrlTimeoutValue" value="70000" />
 </widget>
