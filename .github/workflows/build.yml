@@ -44,20 +44,26 @@ jobs:
           cd college-hub
           cordova platform add android@12.0.1
       
-      # Step 7: Copy Files
+      # Step 7: Create res folder and copy files
       - name: Copy Source Files
         run: |
+          # Create res directory in cordova project
+          mkdir -p college-hub/res
+          
           # Copy config.xml
           cp config.xml college-hub/config.xml
           
-          # Copy HTML file
+          # Copy HTML file to www
           cp index.html college-hub/www/index.html
           
-          # Copy icon
-          cp icon.png college-hub/www/icon.png || echo "icon.png not found, skipping"
+          # Copy icon to res folder (Cordova looks here for resources)
+          cp icon.png college-hub/res/icon.png || echo "icon.png not found, skipping"
           
           # List contents for debugging
+          echo "=== www folder ==="
           ls -la college-hub/www/
+          echo "=== res folder ==="
+          ls -la college-hub/res/
       
       # Step 8: Build APK
       - name: Build Debug APK
