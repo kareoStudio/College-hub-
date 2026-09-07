@@ -4,10 +4,7 @@
     <description>College Hub - Your one-stop college app</description>
     <author email="dev@kareostudeo.com" href="https://kareostudeo.com">Kareo Studio</author>
     
-    <!-- Content -->
     <content src="index.html" />
-    
-    <!-- Allow navigation -->
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -16,19 +13,26 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     
-    <!-- Android preferences -->
-    <preference name="android-minSdkVersion" value="22" />
+    <!-- Android SDK versions -->
+    <preference name="android-minSdkVersion" value="24" />
     <preference name="android-targetSdkVersion" value="33" />
     <preference name="android-compileSdkVersion" value="33" />
     <preference name="AndroidXEnabled" value="true" />
     
-    <!-- WebView settings -->
+    <!-- Screen fitting ke liye -->
     <preference name="Fullscreen" value="false" />
     <preference name="Orientation" value="default" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="EnableViewportScale" value="true" />
     <preference name="BackgroundColor" value="0xFFFFFFFF" />
     <preference name="KeepRunning" value="true" />
     
-    <!-- Splash Screen (Android 12+ compatible) -->
+    <!-- Status bar handle karega -->
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#000000" />
+    <preference name="StatusBarStyle" value="lightcontent" />
+    
+    <!-- Splash Screen -->
     <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/icon.png" />
     <preference name="AndroidWindowSplashScreenBackground" value="#FFFFFF" />
     <preference name="SplashScreenDelay" value="2000" />
@@ -36,7 +40,6 @@
     <!-- Icon -->
     <icon src="res/icon.png" />
     
-    <!-- Platform: Android -->
     <platform name="android">
         <icon src="res/icon.png" density="ldpi" />
         <icon src="res/icon.png" density="mdpi" />
@@ -50,6 +53,5 @@
     <plugin name="cordova-plugin-network-information" source="npm" />
     <plugin name="cordova-plugin-statusbar" source="npm" />
     
-    <!-- Enable webview -->
     <preference name="loadUrlTimeoutValue" value="70000" />
 </widget>
