@@ -12,38 +12,30 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      # Step 1: Checkout code
       - name: Checkout Repository
         uses: actions/checkout@v4
       
-      # Step 2: Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
       
-      # Step 3: Setup Java 17
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
       
-      # Step 4: Setup Android SDK
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
       
-      # Step 5: Install Android Build Tools & Platform (IMPORTANT FIX)
       - name: Install Android Build Tools 33.0.2
         run: |
           export ANDROID_HOME=$ANDROID_SDK_ROOT
           yes | sdkmanager --licenses || true
           sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2"
           sdkmanager --list | grep "build-tools"
-          echo "ANDROID_HOME=$ANDROID_HOME"
-          echo "PATH=$PATH"
       
-      # Step 6: Install Compatible Gradle 7.6
       - name: Install Gradle 7.6
         run: |
           sudo rm -rf /usr/share/gradle-*
@@ -53,31 +45,33 @@ jobs:
           sudo ln -sf /opt/gradle-7.6/bin/gradle /usr/local/bin/gradle
           gradle --version
       
-      # Step 7: Install Cordova
       - name: Install Cordova
         run: npm install -g cordova
       
-      # Step 8: Create Cordova Project
-      - name: Create Cordova Project
+      # IMPORTANT: Pehle files copy karo, phir platform add karo!
+      - name: Setup Cordova Project & Copy Files
         run: |
           cordova create college-hub com.kareostudeo "College Hub"
-          cd college-hub
-          cordova platform add android@12.0.1
-      
-      # Step 9: Copy Files
-      - name: Copy Source Files
-        run: |
-          mkdir -p college-hub/res
+          
+          # Pehle config copy karo
           cp config.xml college-hub/config.xml
+          
+          # HTML files copy karo
           cp index.html college-hub/www/index.html
+          
+          # Icon ke liye folder banao
+          mkdir -p college-hub/res
           cp icon.png college-hub/res/icon.png || echo "icon.png not found, skipping"
           
+          # Ab platform add karo - tabhi manifest sahi banega
+          cd college-hub
+          cordova platform add android@12.0.1
+          
           echo "=== www folder ==="
-          ls -la college-hub/www/
+          ls -la www/
           echo "=== res folder ==="
-          ls -la college-hub/res/
+          ls -la res/
       
-      # Step 10: Build APK
       - name: Build Debug APK
         env:
           ANDROID_HOME: ${{ env.ANDROID_SDK_ROOT }}
@@ -85,14 +79,12 @@ jobs:
           cd college-hub
           cordova build android --debug
       
-      # Step 11: Upload APK Artifact
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: College-Hub-APK
           path: college-hub/platforms/android/app/build/outputs/apk/debug/app-debug.apk
       
-      # Step 12: Upload APK to Release
       - name: Upload to Release
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         uses: softprops/action-gh-release@v1
