@@ -1,0 +1,89 @@
+name: Build College Hub APK
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      # Step 2: Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      # Step 3: Setup Java
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      
+      # Step 4: Setup Android SDK
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+      
+      # Step 5: Install Cordova
+      - name: Install Cordova
+        run: npm install -g cordova
+      
+      # Step 6: Create Cordova Project
+      - name: Create Cordova Project
+        run: |
+          cordova create college-hub com.kareostudeo "College Hub"
+          cd college-hub
+          cordova platform add android@12.0.1
+      
+      # Step 7: Copy Files
+      - name: Copy Source Files
+        run: |
+          # Copy config.xml
+          cp config.xml college-hub/config.xml
+          
+          # Copy HTML file
+          cp index.html college-hub/www/index.html
+          
+          # Copy icon
+          cp icon.png college-hub/www/icon.png || echo "icon.png not found, skipping"
+          
+          # List contents for debugging
+          ls -la college-hub/www/
+      
+      # Step 8: Build APK
+      - name: Build Debug APK
+        run: |
+          cd college-hub
+          cordova build android --debug
+      
+      # Step 9: Upload APK Artifact
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: College-Hub-APK
+          path: college-hub/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+      
+      # Step 10: Upload APK to Release (only on push to main)
+      - name: Upload to Release
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: college-hub/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+          tag_name: v1.0.0-${{ github.run_number }}
+          name: College Hub v1.0.0 Build ${{ github.run_number }}
+          body: |
+            ## College Hub APK
+            - App Name: College Hub
+            - Package: com.kareostudeo
+            - Build Date: ${{ github.event.head_commit.timestamp }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
