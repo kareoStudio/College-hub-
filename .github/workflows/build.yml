@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: '18'
       
-      # Step 3: Setup Java
+      # Step 3: Setup Java 17
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -32,11 +32,18 @@ jobs:
       # Step 4: Setup Android SDK
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
-        with:
-          api-level: 33
-          build-tools: 33.0.2
       
-      # Step 5: Install Compatible Gradle (7.6) - IMPORTANT FIX
+      # Step 5: Install Android Build Tools & Platform (IMPORTANT FIX)
+      - name: Install Android Build Tools 33.0.2
+        run: |
+          export ANDROID_HOME=$ANDROID_SDK_ROOT
+          yes | sdkmanager --licenses || true
+          sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2"
+          sdkmanager --list | grep "build-tools"
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          echo "PATH=$PATH"
+      
+      # Step 6: Install Compatible Gradle 7.6
       - name: Install Gradle 7.6
         run: |
           sudo rm -rf /usr/share/gradle-*
@@ -46,18 +53,18 @@ jobs:
           sudo ln -sf /opt/gradle-7.6/bin/gradle /usr/local/bin/gradle
           gradle --version
       
-      # Step 6: Install Cordova
+      # Step 7: Install Cordova
       - name: Install Cordova
         run: npm install -g cordova
       
-      # Step 7: Create Cordova Project
+      # Step 8: Create Cordova Project
       - name: Create Cordova Project
         run: |
           cordova create college-hub com.kareostudeo "College Hub"
           cd college-hub
           cordova platform add android@12.0.1
       
-      # Step 8: Create res folder and copy files
+      # Step 9: Copy Files
       - name: Copy Source Files
         run: |
           mkdir -p college-hub/res
@@ -70,20 +77,22 @@ jobs:
           echo "=== res folder ==="
           ls -la college-hub/res/
       
-      # Step 9: Build APK
+      # Step 10: Build APK
       - name: Build Debug APK
+        env:
+          ANDROID_HOME: ${{ env.ANDROID_SDK_ROOT }}
         run: |
           cd college-hub
           cordova build android --debug
       
-      # Step 10: Upload APK Artifact
+      # Step 11: Upload APK Artifact
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: College-Hub-APK
           path: college-hub/platforms/android/app/build/outputs/apk/debug/app-debug.apk
       
-      # Step 11: Upload APK to Release
+      # Step 12: Upload APK to Release
       - name: Upload to Release
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         uses: softprops/action-gh-release@v1
