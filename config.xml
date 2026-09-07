@@ -65,6 +65,7 @@
     </platform>
     
     <!-- Plugins -->
+    <plugin name="cordova-plugin-inappbrowser" source="npm" />
     <plugin name="cordova-plugin-network-information" source="npm" />
     <plugin name="cordova-plugin-statusbar" source="npm" />
     <plugin name="cordova-plugin-file" source="npm" />
