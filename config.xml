@@ -13,13 +13,13 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     
-    <!-- Android SDK versions - API 34 (Android 14) -->
+    <!-- Android SDK versions -->
     <preference name="android-minSdkVersion" value="24" />
     <preference name="android-targetSdkVersion" value="34" />
     <preference name="android-compileSdkVersion" value="34" />
     <preference name="AndroidXEnabled" value="true" />
     
-    <!-- Screen fitting ke liye -->
+    <!-- Screen fitting -->
     <preference name="Fullscreen" value="false" />
     <preference name="Orientation" value="default" />
     <preference name="DisallowOverscroll" value="true" />
@@ -27,7 +27,7 @@
     <preference name="BackgroundColor" value="0xFFFFFFFF" />
     <preference name="KeepRunning" value="true" />
     
-    <!-- Status bar handle karega -->
+    <!-- Status bar -->
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <preference name="StatusBarStyle" value="lightcontent" />
@@ -48,7 +48,7 @@
         <icon src="res/icon.png" density="xxhdpi" />
         <icon src="res/icon.png" density="xxxhdpi" />
         
-        <!-- FILE UPLOAD PERMISSIONS - Android 13+ ke liye -->
+        <!-- FILE PERMISSIONS -->
         <config-file target="AndroidManifest.xml" parent="/*" xmlns:android="http://schemas.android.com/apk/res/android">
             <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
             <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
@@ -64,6 +64,9 @@
     <plugin name="cordova-plugin-network-information" source="npm" />
     <plugin name="cordova-plugin-statusbar" source="npm" />
     <plugin name="cordova-plugin-file" source="npm" />
+    <plugin name="cordova-plugin-filepath" source="npm" />
+    <plugin name="cordova-plugin-filechooser" source="npm" />
+    <plugin name="cordova-plugin-android-permissions" source="npm" />
     
     <preference name="loadUrlTimeoutValue" value="70000" />
 </widget>
