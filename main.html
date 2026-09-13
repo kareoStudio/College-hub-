@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,7 +55,8 @@
       padding: 0;
       -webkit-tap-highlight-color: transparent;
     }
-    /* Full-Screen System Broadcast & App Update Alert Overlay */
+
+    /* System Broadcast Overlay */
     .system-alert-overlay {
       position: fixed;
       inset: 0;
@@ -166,7 +168,7 @@
       transform: translateX(22px);
     }
 
-    /* Full-Screen Offline Screen Overlay */
+    /* Offline Screen Overlay */
     .offline-screen {
       position: fixed;
       inset: 0;
@@ -330,7 +332,7 @@
       to { transform: translateY(-10px); opacity: 0; }
     }
 
-    /* Loading Overlay Screen */
+    /* Loading Screen */
     .app-loader-screen {
       position: fixed;
       inset: 0;
@@ -355,7 +357,7 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Auth Gate Card */
+    /* Auth Gate */
     .login-container {
       min-height: 100vh;
       width: 100%;
@@ -417,7 +419,6 @@
       margin-top: 4px;
     }
 
-    /* Auth Tabs */
     .auth-tab-switch {
       display: flex;
       background: var(--bg-subtle);
@@ -497,12 +498,8 @@
       transition: var(--transition);
       outline: none;
     }
-    .form-control.has-icon {
-      padding-left: 42px;
-    }
-    .form-control.has-pwd {
-      padding-right: 42px;
-    }
+    .form-control.has-icon { padding-left: 42px; }
+    .form-control.has-pwd { padding-right: 42px; }
 
     .form-control:focus {
       border-color: var(--primary);
@@ -562,15 +559,11 @@
       transition: var(--transition);
       box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
     }
-
     .btn-primary:hover {
       background: var(--primary-hover);
       box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
     }
-
-    .btn-primary:active {
-      transform: scale(0.985);
-    }
+    .btn-primary:active { transform: scale(0.985); }
 
     /* Layout */
     .dashboard-layout {
@@ -628,17 +621,14 @@
       width: 100%;
       text-align: left;
     }
-
     .nav-item:hover {
       background: var(--bg-subtle);
       color: var(--text-main);
     }
-
     .nav-item.active {
       background: var(--primary-light);
       color: var(--primary);
     }
-
     .nav-item svg {
       width: 20px;
       height: 20px;
@@ -743,7 +733,6 @@
       transition: var(--transition);
       position: relative;
     }
-
     .bottom-tab svg { width: 22px; height: 22px; }
     .bottom-tab.active { color: var(--primary); }
     .bottom-tab.active::after {
@@ -778,7 +767,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Cards & Components */
+    /* Cards */
     .card {
       background: var(--bg-surface);
       border-radius: var(--radius-lg);
@@ -806,7 +795,6 @@
       font-size: 11.5px;
       font-weight: 600;
     }
-
     .badge-blue { background: var(--primary-light); color: var(--primary); }
     .badge-amber { background: var(--accent-light); color: #b45309; }
     .badge-green { background: var(--success-light); color: #047857; }
@@ -898,13 +886,13 @@
     .modal-card {
       background: #ffffff;
       width: 100%;
-      max-width: 540px;
+      max-width: 560px;
       border-radius: 20px 20px 0 0;
       padding: 24px;
       box-shadow: var(--shadow-float);
       transform: translateY(100%);
       transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      max-height: 90vh;
+      max-height: 92vh;
       overflow-y: auto;
     }
 
@@ -1080,36 +1068,6 @@
       border-top: 1px solid var(--bg-subtle);
     }
 
-    .quick-practice-container {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-      scrollbar-width: none;
-    }
-    .quick-practice-container::-webkit-scrollbar { display: none; }
-
-    .practice-pill {
-      background: #ffffff;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-full);
-      padding: 8px 16px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-main);
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    .practice-pill:hover {
-      background: var(--primary-light);
-      border-color: #bfdbfe;
-      color: var(--primary);
-    }
-
     .announcement-card {
       background: #ffffff;
       border-left: 4px solid var(--accent);
@@ -1145,7 +1103,7 @@
       margin-top: 6px;
     }
 
-    /* Work Filter */
+    /* Filter Bar */
     .filter-bar {
       display: flex;
       flex-direction: column;
@@ -1173,9 +1131,7 @@
       outline: none;
       background: #ffffff;
     }
-    .search-input-box input:focus {
-      border-color: var(--primary);
-    }
+    .search-input-box input:focus { border-color: var(--primary); }
     .search-input-box svg {
       position: absolute;
       left: 10px;
@@ -1222,6 +1178,59 @@
       background: var(--border-color);
     }
 
+    /* Homework Checklist Cards */
+    .homework-item-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      transition: var(--transition);
+      margin-bottom: 10px;
+    }
+    .homework-item-card.completed {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+      opacity: 0.85;
+    }
+    .homework-item-card.completed .homework-task-title {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+    .hw-checkbox {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 2px solid #94a3b8;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      background: #ffffff;
+      transition: var(--transition);
+    }
+    .hw-checkbox.checked {
+      background: var(--success);
+      border-color: var(--success);
+      color: #ffffff;
+    }
+    .homework-task-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+    .homework-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      white-space: pre-line;
+    }
+
     /* MCQ */
     .mcq-option {
       display: flex;
@@ -1255,9 +1264,7 @@
       justify-content: center;
       flex-shrink: 0;
     }
-    .mcq-option.selected .mcq-radio {
-      border-color: var(--primary);
-    }
+    .mcq-option.selected .mcq-radio { border-color: var(--primary); }
     .mcq-option.selected .mcq-radio::after {
       content: '';
       width: 8px;
@@ -1418,7 +1425,7 @@
   <!-- Toast Container -->
   <div id="toast-container"></div>
 
-  <!-- DEDICATED FULL-SCREEN OFFLINE SCREEN -->
+  <!-- OFFLINE SCREEN -->
   <div id="app-offline-screen" class="offline-screen" role="alert" aria-live="assertive">
     <div class="offline-card">
       <div class="offline-icon-ring">
@@ -1426,20 +1433,14 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L3 3m12.728 5.636a5 5 0 010 7.072m0 0l-2.829-2.829M9.172 9.172a1 1 0 011.414 0m0 0a3 3 0 010 4.243m0 0L7.757 16.243M3.05 11a9 9 0 011.95-3.05M12 20h.01"/>
         </svg>
       </div>
-
       <div class="offline-status-pill">
         <span class="offline-status-dot"></span>
         <span>No Internet Connection</span>
       </div>
-
-      <h2 style="font-size:22px; font-weight:800; color:var(--text-main); margin-bottom:8px; letter-spacing:-0.02em;">
-        You're Currently Offline
-      </h2>
-
+      <h2 style="font-size:22px; font-weight:800; color:var(--text-main); margin-bottom:8px; letter-spacing:-0.02em;">You're Currently Offline</h2>
       <p style="font-size:13.5px; color:var(--text-muted); max-width:340px; line-height:1.5;">
-        College Hub requires an active internet connection to load study resources, take quizzes, and sync your cloud data.
+        College Hub requires an active internet connection to load study resources, view homework, and sync with cloud.
       </p>
-
       <div class="offline-tips-box">
         <strong style="color:var(--text-main); font-size:13px; display:block;">Quick troubleshooting tips:</strong>
         <ul>
@@ -1448,21 +1449,17 @@
           <li>Check your router or network permissions.</li>
         </ul>
       </div>
-
       <button id="btn-offline-retry" type="button" class="btn-primary" style="width:100%; max-width:280px;" onclick="window.CollegeHubApp.checkConnectionNow()">
         <svg id="offline-btn-icon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
         </svg>
         <span id="offline-btn-text">Try Reconnecting</span>
       </button>
-
-      <div style="font-size:11.5px; color:var(--text-light); margin-top:14px;">
-        The app will automatically restore once your internet is back.
-      </div>
+      <div style="font-size:11.5px; color:var(--text-light); margin-top:14px;">The app will restore automatically once your internet is back.</div>
     </div>
   </div>
 
-  <!-- FULL-SCREEN SYSTEM NOTIFICATION & APP UPDATE ALERT (METHOD 1) -->
+  <!-- SYSTEM NOTIFICATION & APP UPDATE ALERT -->
   <div id="app-system-alert-overlay" class="system-alert-overlay" role="dialog" aria-modal="true" aria-labelledby="system-alert-title">
     <div class="system-alert-modal">
       <div id="system-alert-icon-container" class="system-alert-icon-ring">
@@ -1471,15 +1468,12 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
         </svg>
       </div>
-
       <span id="system-alert-type-badge" class="badge badge-blue">New Update Available</span>
       <h2 id="system-alert-title" style="font-size:20px; font-weight:800; color:var(--text-main); margin:10px 0 6px 0; letter-spacing:-0.02em;">College Hub Update</h2>
       <div id="system-alert-audience-tag" style="font-size:11.5px; font-weight:700; color:var(--text-muted); margin-bottom:12px;">Notice for All College Students & Faculty</div>
-
       <div id="system-alert-message" style="font-size:13.5px; color:var(--text-muted); line-height:1.6; max-height:220px; overflow-y:auto; text-align:left; background:var(--bg-subtle); padding:14px; border-radius:var(--radius-md); border:1px solid var(--border-color); white-space:pre-line; margin-bottom:18px;">
-        A new version of College Hub has been released with performance improvements and new study materials.
+        A new update is available.
       </div>
-
       <div style="display:flex; flex-direction:column; gap:8px;">
         <a id="system-alert-action-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary" style="text-decoration:none; width:100%;">
           <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
@@ -1498,24 +1492,21 @@
   <!-- ROOT APP -->
   <div class="app-root">
 
-    <!-- SCREEN 1: LOGIN & SIGNUP PORTAL -->
+    <!-- SCREEN 1: LOGIN & SIGNUP -->
     <div id="screen-login" class="screen-view active">
       <div class="login-container">
         <div class="login-card">
           <div class="brand-header">
-            <!-- 5-Tap Target for Hidden Admin Access -->
             <div class="brand-logo-badge" onclick="window.CollegeHubApp.handleLogoSecretTap()" title="College Hub">CH</div>
             <h1 class="brand-title" onclick="window.CollegeHubApp.handleLogoSecretTap()">College Hub</h1>
             <p class="brand-subtitle">Student productivity & academic study portal</p>
           </div>
 
-          <!-- Auth Switcher Tabs -->
           <div class="auth-tab-switch">
             <button class="auth-tab-btn active" id="tab-btn-login" onclick="window.CollegeHubApp.switchAuthTab('login')">Sign In</button>
             <button class="auth-tab-btn" id="tab-btn-signup" onclick="window.CollegeHubApp.switchAuthTab('signup')">Sign Up</button>
           </div>
 
-          <!-- LOGIN FORM -->
           <div id="form-auth-login">
             <form autocomplete="off" onsubmit="event.preventDefault(); window.CollegeHubApp.handleStudentLogin();">
               <div class="form-group">
@@ -1541,7 +1532,6 @@
             </form>
           </div>
 
-          <!-- SIGNUP FORM -->
           <div id="form-auth-signup" style="display:none;">
             <form autocomplete="off" onsubmit="event.preventDefault(); window.CollegeHubApp.handleStudentRegister();">
               <div class="form-group">
@@ -1601,7 +1591,7 @@
       </div>
     </div>
 
-    <!-- SCREEN 2: STUDENT / MEMBER WORKSPACE PORTAL -->
+    <!-- SCREEN 2: STUDENT PORTAL -->
     <div id="screen-student" class="screen-view">
       <div class="dashboard-layout">
         <aside class="app-sidebar">
@@ -1621,13 +1611,21 @@
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
               <span>Work & Resources</span>
             </button>
-            <button class="nav-item" onclick="window.CollegeHubApp.student.switchTab('practice')">
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-              <span>Practice</span>
+            <button class="nav-item" onclick="window.CollegeHubApp.student.openPyqSection()">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <span>PYQ</span>
+            </button>
+            <button class="nav-item" onclick="window.CollegeHubApp.student.switchTab('homework')">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span>Home Work</span>
             </button>
             <button class="nav-item" onclick="window.CollegeHubApp.student.switchTab('quiz')">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
               <span>Quizzes</span>
+            </button>
+            <button class="nav-item" onclick="window.CollegeHubApp.student.switchTab('leaderboard')">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm6 0v-10a2 2 0 00-2-2h-2a2 2 0 00-2 2v10a2 2 0 002 2h2a2 2 0 002-2zm6 0v-14a2 2 0 00-2-2h-2a2 2 0 00-2 2v14a2 2 0 002 2h2a2 2 0 002-2z"/></svg>
+              <span>Leaderboard</span>
             </button>
             <button class="nav-item" onclick="window.CollegeHubApp.student.switchTab('bookmarks')">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
@@ -1685,13 +1683,15 @@
                 <div class="skeleton" style="height:110px;"></div>
               </div>
 
+              <!-- Today's Homework Snippet -->
               <div class="section-title-row">
                 <div class="section-title">
-                  <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                  <span>Quick Practice</span>
+                  <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  <span>Today's Home Work Checklist</span>
                 </div>
+                <span class="section-link" onclick="window.CollegeHubApp.student.switchTab('homework')">Day-by-Day &rarr;</span>
               </div>
-              <div class="quick-practice-container" id="home-quick-practice-pills"></div>
+              <div id="home-today-homework-box"></div>
 
               <div class="section-title-row">
                 <div class="section-title">
@@ -1726,74 +1726,22 @@
                     <option value="Notes">Notes</option>
                     <option value="PDF">PDF</option>
                     <option value="Reference">Reference</option>
+                    <option value="PYQ">PYQ</option>
                   </select>
                 </div>
               </div>
-
               <div id="work-resource-container"></div>
             </div>
 
-            <!-- TAB 3: PRACTICE -->
-            <div id="student-tab-practice" class="tab-pane">
-              <div id="practice-list-view">
-                <div class="section-title-row">
-                  <h2 class="section-title">Practice Questions by Topic</h2>
-                </div>
-                <p style="font-size:13px; color:var(--text-muted); margin-bottom:16px;">Test your knowledge in untimed chapter-wise self evaluations.</p>
-                <div id="practice-topics-list" class="work-grid"></div>
-              </div>
-
-              <div id="practice-session-view" style="display:none;">
-                <div class="card" style="max-width:680px; margin:0 auto;">
-                  <div class="card-header-row" style="margin-bottom:14px;">
-                    <div>
-                      <span id="practice-badge-subject" class="badge badge-blue">C Programming</span>
-                      <h3 id="practice-session-title" style="margin-top:4px; font-size:16px;">Pointers and Functions</h3>
-                    </div>
-                    <button class="btn-secondary btn-sm" onclick="window.CollegeHubApp.student.exitPractice()">Exit Practice</button>
-                  </div>
-                  
-                  <div style="font-size:12.5px; font-weight:700; color:var(--text-muted); margin-bottom:8px;">
-                    Question <span id="practice-current-q-index">1</span> of <span id="practice-total-q">1</span>
-                  </div>
-
-                  <div id="practice-question-text" style="font-size:15px; font-weight:700; margin-bottom:16px; color:var(--text-main);"></div>
-                  <div id="practice-options-list"></div>
-                  <div id="practice-feedback-banner" style="display:none; margin-top:14px; padding:12px; border-radius:var(--radius-md); font-size:13px;"></div>
-
-                  <div class="mcq-nav-buttons">
-                    <button id="btn-practice-prev" class="btn-secondary" onclick="window.CollegeHubApp.student.navPracticeQuestion(-1)">Previous</button>
-                    <button id="btn-practice-next" class="btn-primary" style="width:auto; padding:0 24px;" onclick="window.CollegeHubApp.student.navPracticeQuestion(1)">Next Question</button>
-                  </div>
+            <!-- TAB 3: HOME WORK (DAY BY DAY CHECKLIST) -->
+            <div id="student-tab-homework" class="tab-pane">
+              <div class="section-title-row">
+                <div>
+                  <h2 class="section-title">Home Work Tracker</h2>
+                  <p style="font-size:12.5px; color:var(--text-muted);">Check off tasks as you complete today's or previous day's homework.</p>
                 </div>
               </div>
-
-              <div id="practice-result-view" style="display:none;">
-                <div class="card text-center" style="max-width:680px; margin:0 auto; padding:32px 20px;">
-                  <div class="badge badge-green" style="margin:0 auto 12px auto;">Practice Session Completed</div>
-                  <h2 style="font-size:22px; font-weight:800;">Great Effort!</h2>
-                  
-                  <div class="result-score-circle" id="practice-score-circle" style="--score-pct: 100;">
-                    <div class="result-score-inner">
-                      <span id="practice-res-pct">100%</span>
-                    </div>
-                  </div>
-
-                  <div style="display:flex; justify-content:center; gap:20px; margin:16px 0;">
-                    <div>
-                      <div style="font-size:12px; color:var(--text-muted);">Correct</div>
-                      <div id="practice-res-correct" style="font-size:18px; font-weight:700; color:var(--success);">0</div>
-                    </div>
-                    <div style="border-left:1px solid var(--border-color);"></div>
-                    <div>
-                      <div style="font-size:12px; color:var(--text-muted);">Wrong</div>
-                      <div id="practice-res-wrong" style="font-size:18px; font-weight:700; color:var(--danger);">0</div>
-                    </div>
-                  </div>
-
-                  <button class="btn-primary" style="width:auto; padding:0 20px; margin:0 auto;" onclick="window.CollegeHubApp.student.exitPractice()">Back to Practice</button>
-                </div>
-              </div>
+              <div id="student-homework-container" style="margin-top:14px;"></div>
             </div>
 
             <!-- TAB 4: QUIZ -->
@@ -1801,6 +1749,7 @@
               <div id="quiz-list-view">
                 <div class="section-title-row">
                   <h2 class="section-title">Available Quizzes</h2>
+                  <span class="section-link" onclick="window.CollegeHubApp.student.switchTab('leaderboard')">🏆 Leaderboard</span>
                 </div>
                 <div id="quiz-cards-catalog" class="work-grid"></div>
               </div>
@@ -1864,6 +1813,16 @@
               </div>
             </div>
 
+            <!-- TAB: LEADERBOARD -->
+            <div id="student-tab-leaderboard" class="tab-pane">
+              <div class="section-title-row">
+                <h2 class="section-title">Quiz Leaderboard</h2>
+              </div>
+              <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Ranked by average quiz score across all attempts.</p>
+              <div id="leaderboard-my-rank-banner" class="card" style="display:none; margin-bottom:16px; padding:12px 16px; font-size:13px; font-weight:700; color:var(--primary); background:var(--primary-light); border:1px solid var(--primary);"></div>
+              <div id="leaderboard-list-container" style="display:flex; flex-direction:column; gap:10px;"></div>
+            </div>
+
             <!-- TAB 5: BOOKMARKS -->
             <div id="student-tab-bookmarks" class="tab-pane">
               <div class="section-title-row">
@@ -1914,7 +1873,7 @@
 
               <div class="card" style="padding:6px 12px; margin-top:16px;">
                 <button class="nav-item" onclick="window.CollegeHubApp.student.switchTab('bookmarks')">
-                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-round stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
                   <span>My Bookmarks</span>
                 </button>
                 <button class="nav-item" style="color:var(--danger);" onclick="window.CollegeHubApp.logout()">
@@ -1937,9 +1896,9 @@
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
             <span>Work</span>
           </button>
-          <button class="bottom-tab" data-tab="practice" onclick="window.CollegeHubApp.student.switchTab('practice')">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-            <span>Practice</span>
+          <button class="bottom-tab" data-tab="homework" onclick="window.CollegeHubApp.student.switchTab('homework')">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>Homework</span>
           </button>
           <button class="bottom-tab" data-tab="quiz" onclick="window.CollegeHubApp.student.switchTab('quiz')">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -1973,13 +1932,17 @@
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
               <span>Resources</span>
             </button>
+            <button class="nav-item" onclick="window.CollegeHubApp.admin.openPyqSection()">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <span>PYQ</span>
+            </button>
+            <button class="nav-item" onclick="window.CollegeHubApp.admin.switchTab('homework')">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span>Home Work</span>
+            </button>
             <button class="nav-item" onclick="window.CollegeHubApp.admin.switchTab('quizzes')">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
               <span>Quizzes</span>
-            </button>
-            <button class="nav-item" onclick="window.CollegeHubApp.admin.switchTab('practice')">
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-              <span>Practice Questions</span>
             </button>
             <button class="nav-item" onclick="window.CollegeHubApp.admin.switchTab('announcements')">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
@@ -2036,12 +1999,12 @@
                   <span class="stat-value" id="admin-stat-quizzes">-</span>
                 </div>
                 <div class="stat-card">
-                  <span class="stat-label">Practice Bank</span>
-                  <span class="stat-value" id="admin-stat-practice">-</span>
+                  <span class="stat-label">Home Work Tasks</span>
+                  <span class="stat-value" id="admin-stat-homework">-</span>
                 </div>
               </div>
 
-              <!-- Dedicated System Broadcast Quick Banner (Visible on Mobile & Desktop) -->
+              <!-- Dedicated System Broadcast Quick Banner -->
               <div class="card admin-only-btn" style="margin-bottom:20px; border-left:4px solid var(--primary); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; background:linear-gradient(135deg, #ffffff, #eff6ff);">
                 <div>
                   <div style="font-weight:800; font-size:14.5px; display:flex; align-items:center; gap:8px;">
@@ -2061,8 +2024,8 @@
               <div class="quick-actions-bar">
                 <button class="btn-primary admin-only-btn" style="width:auto; background:linear-gradient(135deg, #2563eb, #1d4ed8);" onclick="window.CollegeHubApp.admin.switchTab('broadcast')">📢 Send App Update</button>
                 <button class="btn-primary" style="width:auto;" onclick="window.CollegeHubApp.modal.open('modal-add-resource')">+ Upload Resource</button>
-                <button class="btn-secondary" onclick="window.CollegeHubApp.modal.open('modal-create-quiz')">+ Create Quiz</button>
-                <button class="btn-secondary" onclick="window.CollegeHubApp.modal.open('modal-add-practice')">+ Add Practice Question</button>
+                <button class="btn-secondary" onclick="window.CollegeHubApp.modal.open('modal-add-homework')">+ Add Home Work</button>
+                <button class="btn-secondary" onclick="window.CollegeHubApp.admin.openCreateQuizModal()">+ Create Quiz</button>
                 <button class="btn-secondary" onclick="window.CollegeHubApp.modal.open('modal-create-announcement')">+ New Announcement</button>
                 <button class="btn-secondary admin-only-btn" onclick="window.CollegeHubApp.modal.open('modal-create-member')">+ Create Member</button>
               </div>
@@ -2076,9 +2039,21 @@
 
             <!-- TAB 2: RESOURCES -->
             <div id="admin-tab-resources" class="tab-pane">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
                 <h2 class="section-title">Manage Study Resources</h2>
-                <button class="btn-primary" style="width:auto;" onclick="window.CollegeHubApp.modal.open('modal-add-resource')">+ Add Resource</button>
+                <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                  <select id="admin-resources-filter-type" class="filter-select" onchange="window.CollegeHubApp.admin.renderResourcesTable()">
+                    <option value="ALL">All Types</option>
+                    <option value="Daily Work">Daily Work</option>
+                    <option value="Assignment">Assignment</option>
+                    <option value="Notes">Notes</option>
+                    <option value="PDF">PDF</option>
+                    <option value="Reference">Reference</option>
+                    <option value="PYQ">PYQ</option>
+                  </select>
+                  <button class="btn-secondary" style="width:auto;" onclick="window.CollegeHubApp.admin.openPyqSection()">📄 PYQ Only</button>
+                  <button class="btn-primary" style="width:auto;" onclick="window.CollegeHubApp.modal.open('modal-add-resource')">+ Add Resource</button>
+                </div>
               </div>
               <div class="data-table-container">
                 <table class="data-table">
@@ -2099,22 +2074,25 @@
               </div>
             </div>
 
-            <!-- TAB 3: QUIZZES -->
+            <!-- TAB 3: HOME WORK MANAGEMENT (ADMIN) -->
+            <div id="admin-tab-homework" class="tab-pane">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                <div>
+                  <h2 class="section-title">Manage Daily Home Work</h2>
+                  <p style="font-size:12px; color:var(--text-muted);">Assign day-by-day homework tasks for students to check off.</p>
+                </div>
+                <button class="btn-primary" style="width:auto;" onclick="window.CollegeHubApp.modal.open('modal-add-homework')">+ Add Home Work</button>
+              </div>
+              <div id="admin-homework-catalog"></div>
+            </div>
+
+            <!-- TAB 4: QUIZZES -->
             <div id="admin-tab-quizzes" class="tab-pane">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                 <h2 class="section-title">Quiz Curriculum Management</h2>
-                <button class="btn-primary" style="width:auto;" onclick="window.CollegeHubApp.modal.open('modal-create-quiz')">+ Create Quiz</button>
+                <button class="btn-primary" style="width:auto;" onclick="window.CollegeHubApp.admin.openCreateQuizModal()">+ Create Quiz</button>
               </div>
               <div id="admin-quiz-catalog" class="work-grid"></div>
-            </div>
-
-            <!-- TAB 4: PRACTICE -->
-            <div id="admin-tab-practice" class="tab-pane">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-                <h2 class="section-title">Practice Question Bank</h2>
-                <button class="btn-primary" style="width:auto;" onclick="window.CollegeHubApp.modal.open('modal-add-practice')">+ Add Question</button>
-              </div>
-              <div id="admin-practice-catalog" class="work-grid"></div>
             </div>
 
             <!-- TAB 5: ANNOUNCEMENTS -->
@@ -2126,7 +2104,7 @@
               <div id="admin-announcement-list"></div>
             </div>
 
-            <!-- TAB: SYSTEM BROADCAST & APP UPDATES (SUPER ADMIN ONLY) -->
+            <!-- TAB: SYSTEM BROADCAST -->
             <div id="admin-tab-broadcast" class="tab-pane">
               <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
                 <div>
@@ -2143,7 +2121,6 @@
 
               <div class="card" style="max-width:760px;">
                 <form onsubmit="event.preventDefault(); window.CollegeHubApp.admin.handleSaveBroadcast();">
-                  
                   <div class="switch-toggle-row">
                     <div>
                       <strong style="font-size:14px; color:var(--text-main); display:block;">Enable Full-Screen Broadcast</strong>
@@ -2204,7 +2181,7 @@
                       <div>
                         <strong style="font-size:13.5px; color:var(--danger);">Force Mandatory Action (Cannot Be Dismissed)</strong>
                         <p style="font-size:12px; color:var(--text-muted); margin-top:2px;">
-                          If checked, the "Continue to App" dismiss button will be hidden completely. Users must click the action button to proceed.
+                          If checked, users must click the action button to proceed.
                         </p>
                       </div>
                     </label>
@@ -2223,7 +2200,7 @@
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                 <div>
                   <h2 class="section-title">Student Directory, Passwords & Roles</h2>
-                  <p style="font-size:12px; color:var(--text-muted);">View student passwords, change roles to <strong>Member</strong>, or disable accounts.</p>
+                  <p style="font-size:12px; color:var(--text-muted);">View profiles, performance & score stats, student passwords, or assign roles.</p>
                 </div>
               </div>
               <div class="data-table-container">
@@ -2252,7 +2229,7 @@
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                 <div>
                   <h2 class="section-title">Staff & Member Roles</h2>
-                  <p style="font-size:12px; color:var(--text-muted);">Members can upload resources, quizzes, and notices but cannot manage students.</p>
+                  <p style="font-size:12px; color:var(--text-muted);">Members can upload resources, quizzes, and notices.</p>
                 </div>
                 <button class="btn-primary" style="width:auto;" onclick="window.CollegeHubApp.modal.open('modal-create-member')">+ Add Member</button>
               </div>
@@ -2287,9 +2264,9 @@
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
             <span>Resources</span>
           </button>
-          <button class="bottom-tab admin-only-tab" data-admintab="broadcast" onclick="window.CollegeHubApp.admin.switchTab('broadcast')">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
-            <span>Broadcast</span>
+          <button class="bottom-tab" data-admintab="homework" onclick="window.CollegeHubApp.admin.switchTab('homework')">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>Homework</span>
           </button>
           <button class="bottom-tab" data-admintab="quizzes" onclick="window.CollegeHubApp.admin.switchTab('quizzes')">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
@@ -2353,9 +2330,6 @@
         </div>
         <button class="modal-close" onclick="window.CollegeHubApp.modal.close('modal-create-member')">✕</button>
       </div>
-      <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:14px;">
-        Members can upload and modify resources, quizzes, and announcements. They <strong>cannot</strong> manage students or staff.
-      </p>
       <form autocomplete="off" onsubmit="event.preventDefault(); window.CollegeHubApp.admin.handleCreateMember();">
         <div class="form-group">
           <label class="form-label">Member Full Name</label>
@@ -2387,7 +2361,7 @@
     </div>
   </div>
 
-  <!-- Modal: Resource Detail -->
+  <!-- Modal: Resource Detail (Works from both Student & Admin portals) -->
   <div id="modal-resource-detail" class="modal-overlay">
     <div class="modal-card">
       <div class="modal-header">
@@ -2410,11 +2384,11 @@
 
       <div style="display:flex; flex-direction:column; gap:8px;">
         <div style="display:flex; gap:8px;">
-          <button id="modal-btn-viewfile" class="btn-primary" style="flex:1;" onclick="window.CollegeHubApp.student.handleViewFile()">
+          <button id="modal-btn-viewfile" class="btn-primary" style="flex:1;" onclick="window.CollegeHubApp.handleViewFile()">
             <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
             <span>View File</span>
           </button>
-          <button id="modal-btn-downloadfile" class="btn-secondary" style="flex:1;" onclick="window.CollegeHubApp.student.handleDownloadFile()">
+          <button id="modal-btn-downloadfile" class="btn-secondary" style="flex:1;" onclick="window.CollegeHubApp.handleDownloadFile()">
             <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
             <span>Download</span>
           </button>
@@ -2427,7 +2401,54 @@
     </div>
   </div>
 
-  <!-- Modal: Admin Add Resource (With Google Drive File Upload) -->
+  <!-- Modal: Admin View Student Profile & Score Stats -->
+  <div id="modal-admin-student-profile" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <span class="badge badge-blue">Student Records</span>
+          <h3 class="modal-title" style="margin-top:4px;" id="admin-view-stud-name">Student Profile</h3>
+        </div>
+        <button class="modal-close" onclick="window.CollegeHubApp.modal.close('modal-admin-student-profile')">✕</button>
+      </div>
+      
+      <div class="card" style="margin-bottom:16px; background:var(--bg-subtle);">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div>
+            <div style="font-size:12px; color:var(--text-muted);">Enrollment / Student ID</div>
+            <strong style="font-size:16px;" id="admin-view-stud-id">-</strong>
+          </div>
+          <div>
+            <div style="font-size:12px; color:var(--text-muted);">Course & Semester</div>
+            <strong id="admin-view-stud-course">-</strong>
+          </div>
+          <div>
+            <div style="font-size:12px; color:var(--text-muted);">Email</div>
+            <span id="admin-view-stud-email">-</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-bottom:10px;">Academic Quiz Scores</div>
+      <div class="admin-stats-grid" style="margin-bottom:16px;">
+        <div class="stat-card">
+          <span class="stat-label">Quizzes Attempted</span>
+          <span class="stat-value" id="admin-view-stud-attempts">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Average Score</span>
+          <span class="stat-value" id="admin-view-stud-avg" style="color:var(--success);">-</span>
+        </div>
+      </div>
+
+      <div style="font-weight:700; font-size:13px; margin-bottom:8px;">Recent Quiz Submissions</div>
+      <div id="admin-view-stud-quiz-list" style="max-height:220px; overflow-y:auto; display:flex; flex-direction:column; gap:8px;">
+        <div style="font-size:12.5px; color:var(--text-muted); text-align:center; padding:12px;">Loading quiz attempts...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Admin Add Resource -->
   <div id="modal-add-resource" class="modal-overlay">
     <div class="modal-card">
       <div class="modal-header">
@@ -2457,6 +2478,7 @@
             <option value="Notes">Notes</option>
             <option value="PDF">PDF</option>
             <option value="Reference">Reference</option>
+            <option value="PYQ">PYQ (Previous Year Questions)</option>
           </select>
         </div>
         <div class="form-group">
@@ -2464,11 +2486,10 @@
           <textarea id="addres-desc" class="form-control" style="height:70px; padding:8px 12px;" placeholder="Details about this material..." required></textarea>
         </div>
         
-        <!-- File Picker for Google Drive Upload -->
         <div class="form-group">
           <label class="form-label">Upload File (Saved to Google Drive)</label>
           <div class="file-input-wrapper">
-            <input type="file" id="addres-fileinput" class="form-control file-input-field" required accept="*/*" />
+            <input type="file" id="addres-fileinput" class="form-control file-input-field" required accept=".pdf,.png,.jpg,.jpeg,.doc,.docx" />
           </div>
           <div id="upload-progress-container" class="upload-progress-box">
             <div class="upload-progress-spinner"></div>
@@ -2494,78 +2515,22 @@
     </div>
   </div>
 
-  <!-- Modal: Admin Create Quiz -->
-  <div id="modal-create-quiz" class="modal-overlay">
+  <!-- Modal: Admin Add Home Work -->
+  <div id="modal-add-homework" class="modal-overlay">
     <div class="modal-card">
       <div class="modal-header">
-        <h3 class="modal-title">Create New Quiz</h3>
-        <button class="modal-close" onclick="window.CollegeHubApp.modal.close('modal-create-quiz')">✕</button>
+        <h3 class="modal-title">Assign New Home Work</h3>
+        <button class="modal-close" onclick="window.CollegeHubApp.modal.close('modal-add-homework')">✕</button>
       </div>
-      <form onsubmit="event.preventDefault(); window.CollegeHubApp.admin.handleCreateQuiz();">
+      <form onsubmit="event.preventDefault(); window.CollegeHubApp.admin.handleCreateHomework();">
         <div class="form-group">
-          <label class="form-label">Quiz Title</label>
-          <input type="text" id="quizcreate-title" class="form-control" placeholder="e.g. C Programming Loops & Arrays Assessment" required />
+          <label class="form-label">Homework Title / Task</label>
+          <input type="text" id="hw-title" class="form-control" placeholder="e.g. Chapter 4 Exercise 1 to 10" required />
         </div>
-        <div class="form-group">
-          <label class="form-label">Subject</label>
-          <select id="quizcreate-subject" class="form-control" required>
-            <option value="Basic Mathematics">Basic Mathematics</option>
-            <option value="C Programming">C Programming</option>
-            <option value="Principle of Management">Principle of Management</option>
-            <option value="Computer Fundamentals and PC Software">Computer Fundamentals and PC Software</option>
-            <option value="Communication English">Communication English</option>
-          </select>
-        </div>
-        <div style="display:flex; gap:10px;">
-          <div class="form-group" style="flex:1;">
-            <label class="form-label">Duration (Minutes)</label>
-            <input type="number" id="quizcreate-duration" class="form-control" value="10" min="1" required />
-          </div>
-          <div class="form-group" style="flex:1;">
-            <label class="form-label">Total Marks</label>
-            <input type="number" id="quizcreate-marks" class="form-control" value="10" min="1" required />
-          </div>
-        </div>
-        <div class="card" style="margin-top:8px; background:var(--bg-subtle);">
-          <div style="font-weight:700; font-size:13px; margin-bottom:8px;">Question #1</div>
-          <input type="text" id="quizcreate-q1" class="form-control" placeholder="Question text..." required style="margin-bottom:8px;" />
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-            <input type="text" id="quizcreate-opta" class="form-control" placeholder="Option A" required />
-            <input type="text" id="quizcreate-optb" class="form-control" placeholder="Option B" required />
-            <input type="text" id="quizcreate-optc" class="form-control" placeholder="Option C" required />
-            <input type="text" id="quizcreate-optd" class="form-control" placeholder="Option D" required />
-          </div>
-          <div class="form-group" style="margin-top:8px;">
-            <label class="form-label">Correct Option Index</label>
-            <select id="quizcreate-correct" class="form-control">
-              <option value="0">Option A</option>
-              <option value="1">Option B</option>
-              <option value="2">Option C</option>
-              <option value="3">Option D</option>
-            </select>
-          </div>
-        </div>
-        <button type="submit" id="btn-submit-quiz" class="btn-primary" style="margin-top:14px;">Save Quiz to Firestore</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Modal: Admin Add Practice Question -->
-  <div id="modal-add-practice" class="modal-overlay">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3 class="modal-title">Add Practice Question</h3>
-        <button class="modal-close" onclick="window.CollegeHubApp.modal.close('modal-add-practice')">✕</button>
-      </div>
-      <form onsubmit="event.preventDefault(); window.CollegeHubApp.admin.handleCreatePractice();">
-        <div class="form-group">
-          <label class="form-label">Question Text</label>
-          <input type="text" id="prac-create-q" class="form-control" placeholder="e.g. Which format specifier is used for integers in C?" required />
-        </div>
-        <div style="display:flex; gap:10px;">
-          <div class="form-group" style="flex:1;">
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <div class="form-group" style="flex:1; min-width:180px;">
             <label class="form-label">Subject</label>
-            <select id="prac-create-subject" class="form-control">
+            <select id="hw-subject" class="form-control" required>
               <option value="Basic Mathematics">Basic Mathematics</option>
               <option value="C Programming">C Programming</option>
               <option value="Principle of Management">Principle of Management</option>
@@ -2573,32 +2538,67 @@
               <option value="Communication English">Communication English</option>
             </select>
           </div>
-          <div class="form-group" style="flex:1;">
-            <label class="form-label">Topic</label>
-            <input type="text" id="prac-create-topic" class="form-control" placeholder="Loops & Arrays" required />
+          <div class="form-group" style="flex:1; min-width:180px;">
+            <label class="form-label">Target Date</label>
+            <input type="date" id="hw-date" class="form-control" required />
           </div>
         </div>
         <div class="form-group">
-          <label class="form-label">Difficulty</label>
-          <select id="prac-create-diff" class="form-control">
-            <option value="easy">Easy</option>
-            <option value="medium" selected>Medium</option>
-            <option value="hard">Hard</option>
-          </select>
+          <label class="form-label">Description / Instructions</label>
+          <textarea id="hw-desc" class="form-control" style="height:90px; padding:10px 14px;" placeholder="Details or questions students need to complete..." required></textarea>
         </div>
+        <button type="submit" id="btn-submit-homework" class="btn-primary" style="margin-top:12px;">Publish Home Work to Students</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Admin Create Multi-Question Quiz -->
+  <div id="modal-create-quiz" class="modal-overlay">
+    <div class="modal-card" style="max-width:640px;">
+      <div class="modal-header">
+        <div>
+          <span class="badge badge-purple">Curriculum</span>
+          <h3 class="modal-title" style="margin-top:4px;">Create New Quiz</h3>
+        </div>
+        <button class="modal-close" onclick="window.CollegeHubApp.modal.close('modal-create-quiz')">✕</button>
+      </div>
+      <form onsubmit="event.preventDefault(); window.CollegeHubApp.admin.handleCreateQuiz();">
         <div class="form-group">
-          <label class="form-label">Options (Comma separated)</label>
-          <input type="text" id="prac-create-opts" class="form-control" placeholder="%d, %f, %c, %s" required />
+          <label class="form-label">Quiz Title</label>
+          <input type="text" id="quizcreate-title" class="form-control" placeholder="e.g. C Programming Loops & Arrays Assessment" required />
         </div>
-        <div class="form-group">
-          <label class="form-label">Correct Option (exact text)</label>
-          <input type="text" id="prac-create-answer" class="form-control" placeholder="%d" required />
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <div class="form-group" style="flex:1; min-width:180px;">
+            <label class="form-label">Subject</label>
+            <select id="quizcreate-subject" class="form-control" required>
+              <option value="Basic Mathematics">Basic Mathematics</option>
+              <option value="C Programming">C Programming</option>
+              <option value="Principle of Management">Principle of Management</option>
+              <option value="Computer Fundamentals and PC Software">Computer Fundamentals and PC Software</option>
+              <option value="Communication English">Communication English</option>
+            </select>
+          </div>
+          <div class="form-group" style="flex:1; min-width:120px;">
+            <label class="form-label">Duration (Mins)</label>
+            <input type="number" id="quizcreate-duration" class="form-control" value="10" min="1" required />
+          </div>
+          <div class="form-group" style="flex:1; min-width:120px;">
+            <label class="form-label">Total Marks</label>
+            <input type="number" id="quizcreate-marks" class="form-control" value="10" min="1" required />
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Explanation</label>
-          <textarea id="prac-create-exp" class="form-control" style="height:60px;" placeholder="Reasoning for the answer..."></textarea>
+
+        <!-- Dynamic Questions Builder -->
+        <div style="margin:16px 0 10px 0; display:flex; justify-content:space-between; align-items:center;">
+          <strong style="font-size:14px;">Questions (<span id="quiz-builder-count">1</span>)</strong>
+          <button type="button" class="btn-secondary btn-sm" onclick="window.CollegeHubApp.admin.addQuizQuestionField()">+ Add Another Question</button>
         </div>
-        <button type="submit" id="btn-submit-practice" class="btn-primary" style="margin-top:10px;">Save Question to Firestore</button>
+
+        <div id="quiz-questions-builder-container" style="display:flex; flex-direction:column; gap:12px; max-height:360px; overflow-y:auto; padding-right:4px;">
+          <!-- Question blocks injected dynamically -->
+        </div>
+
+        <button type="submit" id="btn-submit-quiz" class="btn-primary" style="margin-top:16px;">Publish Quiz to Cloud</button>
       </form>
     </div>
   </div>
@@ -2646,9 +2646,7 @@
     </div>
   </div>
 
-  <!-- ========================================================
-       FIREBASE MODULAR SDK + GOOGLE DRIVE PROXY CONTROLLERS
-       ======================================================== -->
+  <!-- FIREBASE MODULAR SDK + CONTROLLER -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
     import { 
@@ -2684,7 +2682,6 @@
       appId: "1:1028614613575:web:b89beb93a6c896a11ddf62"
     };
 
-    // Google Apps Script Web App Deployment URL for Drive File Uploads
     const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwuQ4CUxf6aSnl8N6-ObZYA0mBf1aiSuh1pGqIoqcSzmGnNRMO8CjiuXVcd-6JBjUAbeQ/exec";
 
     const firebaseApp = initializeApp(firebaseConfig);
@@ -2765,9 +2762,6 @@
       return `${day} ${month}`;
     }
 
-    /**
-     * Converts File object to Base64 data string
-     */
     function fileToBase64(file) {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -2777,9 +2771,6 @@
       });
     }
 
-    /**
-     * Uploads file to Google Drive using Google Apps Script Web App
-     */
     async function uploadToGoogleDrive(file) {
       const base64Data = await fileToBase64(file);
       const payload = {
@@ -2788,7 +2779,6 @@
         base64Data: base64Data
       };
 
-      // Send as text/plain to prevent CORS preflight restrictions from Google Apps Script
       const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
         method: "POST",
         headers: {
@@ -2809,14 +2799,8 @@
       return result;
     }
 
-    /**
-     * Trashes file in Google Drive via Google Apps Script Web App
-     */
     async function deleteFromGoogleDrive(fileId) {
-      if (!fileId || !GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL.includes("dummy-url")) {
-        console.warn("Google Drive delete skipped: missing fileId or unconfigured Web App URL.");
-        return;
-      }
+      if (!fileId || !GOOGLE_APPS_SCRIPT_URL) return;
       const payload = {
         action: "delete",
         fileId: fileId
@@ -2831,19 +2815,16 @@
       });
 
       if (!response.ok) {
-        throw new Error(`Google Apps Script responded with HTTP status ${response.status}`);
+        throw new Error(`Google Apps Script HTTP status ${response.status}`);
       }
-
-      const result = await response.json();
-      if (result.status !== "success") {
-        throw new Error(result.message || "Failed to delete file from Google Drive.");
-      }
-      return result;
+      return await response.json();
     }
 
     // 3. FIRESTORE DATA SERVICE
     let currentAuthUser = null;
     let activeProfile = null;
+    let globalResourcesCache = [];
+    let activeOpenedResource = null;
 
     async function ensureAnonymousAuth() {
       if (auth.currentUser) {
@@ -2864,9 +2845,9 @@
       async getResources() {
         try {
           await ensureAnonymousAuth();
-          const q = query(collection(db, 'resources'), orderBy('createdAt', 'desc'), limit(50));
+          const q = query(collection(db, 'resources'), orderBy('createdAt', 'desc'), limit(60));
           const snap = await getDocs(q);
-          return snap.docs.map(d => {
+          const list = snap.docs.map(d => {
             const data = d.data();
             return {
               id: d.id,
@@ -2884,9 +2865,41 @@
               dateGroup: formatDateDisplay(data.createdAt)
             };
           });
+          globalResourcesCache = list;
+          return list;
         } catch (err) {
           console.error("Resources error:", err);
           return [];
+        }
+      },
+
+      async getResourceById(id) {
+        let found = globalResourcesCache.find(r => r.id === id);
+        if (found) return found;
+        try {
+          await ensureAnonymousAuth();
+          const d = await getDoc(doc(db, 'resources', id));
+          if (d.exists()) {
+            const data = d.data();
+            return {
+              id: d.id,
+              title: data.title || 'Untitled Resource',
+              subject: data.subject || 'General',
+              type: data.type || 'Daily Work',
+              description: data.description || '',
+              fileName: data.fileName || 'resource.pdf',
+              fileUrl: data.fileUrl || '',
+              downloadUrl: data.downloadUrl || '',
+              fileId: data.fileId || '',
+              uploadedBy: data.uploadedBy || 'Faculty',
+              retention: data.retentionType === 'permanent' ? 'Permanent' : 'Temporary',
+              createdAt: data.createdAt,
+              dateGroup: formatDateDisplay(data.createdAt)
+            };
+          }
+          return null;
+        } catch (err) {
+          return null;
         }
       },
 
@@ -2925,7 +2938,7 @@
       async getQuizzes() {
         try {
           await ensureAnonymousAuth();
-          const q = query(collection(db, 'quizzes'), orderBy('createdAt', 'desc'), limit(20));
+          const q = query(collection(db, 'quizzes'), orderBy('createdAt', 'desc'), limit(30));
           const snap = await getDocs(q);
           return snap.docs.map(d => {
             const data = d.data();
@@ -2960,58 +2973,82 @@
         });
       },
 
-      async getPracticeTopics() {
+      async deleteQuiz(quizId) {
+        await ensureAnonymousAuth();
+        return await deleteDoc(doc(db, 'quizzes', quizId));
+      },
+
+      // HOME WORK DATA OPERATIONS
+      async getHomeworkList() {
         try {
           await ensureAnonymousAuth();
-          const q = query(collection(db, 'practiceQuestions'), orderBy('createdAt', 'desc'), limit(100));
+          const q = query(collection(db, 'homework'), orderBy('createdAt', 'desc'), limit(60));
           const snap = await getDocs(q);
-          const raw = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-
-          const map = {};
-          raw.forEach(item => {
-            const topicKey = item.topic || 'General';
-            if (!map[topicKey]) {
-              map[topicKey] = {
-                id: topicKey,
-                topic: topicKey,
-                subject: item.subject || 'General',
-                difficulty: item.difficulty || 'medium',
-                questions: []
-              };
-            }
-            map[topicKey].questions.push({
-              q: item.question,
-              options: item.options || [],
-              answer: item.correctAnswerIndex ?? 0,
-              explanation: item.explanation || 'No explanation.'
-            });
+          return snap.docs.map(d => {
+            const data = d.data();
+            return {
+              id: d.id,
+              title: data.title || 'Homework Task',
+              subject: data.subject || 'General',
+              targetDate: data.targetDate || '',
+              description: data.description || '',
+              createdBy: data.createdBy || 'Staff',
+              createdAt: data.createdAt,
+              dateGroup: formatDateDisplay(data.createdAt)
+            };
           });
-
-          return Object.values(map).map(t => ({
-            ...t,
-            questionsCount: t.questions.length
-          }));
         } catch (err) {
-          console.error("Practice questions error:", err);
+          console.error("Homework error:", err);
           return [];
         }
       },
 
-      async savePracticeQuestion(data) {
+      async saveHomework(data) {
         await ensureAnonymousAuth();
-        return await addDoc(collection(db, 'practiceQuestions'), {
-          question: data.question,
+        return await addDoc(collection(db, 'homework'), {
+          title: data.title,
           subject: data.subject,
-          topic: data.topic,
-          difficulty: data.difficulty,
-          options: data.options,
-          correctAnswer: data.options[data.answerIndex] || '',
-          correctAnswerIndex: data.answerIndex,
-          explanation: data.explanation,
-          createdBy: activeProfile?.uid || currentAuthUser?.uid,
+          targetDate: data.targetDate,
+          description: data.description,
+          createdBy: activeProfile?.name || 'Staff Member',
           createdAt: serverTimestamp(),
           updatedAt: serverTimestamp()
         });
+      },
+
+      async deleteHomework(id) {
+        await ensureAnonymousAuth();
+        return await deleteDoc(doc(db, 'homework', id));
+      },
+
+      getStudentCompletedHomework(studentUid) {
+        const key = `ch_hw_done_${studentUid || activeProfile?.uid || 'guest'}`;
+        try {
+          return JSON.parse(localStorage.getItem(key) || '[]');
+        } catch (e) {
+          return [];
+        }
+      },
+
+      toggleStudentHomeworkDone(hwId, studentUid) {
+        const key = `ch_hw_done_${studentUid || activeProfile?.uid || 'guest'}`;
+        let done = [];
+        try {
+          done = JSON.parse(localStorage.getItem(key) || '[]');
+        } catch (e) {
+          done = [];
+        }
+        const idx = done.indexOf(hwId);
+        let isDone = false;
+        if (idx > -1) {
+          done.splice(idx, 1);
+          isDone = false;
+        } else {
+          done.push(hwId);
+          isDone = true;
+        }
+        localStorage.setItem(key, JSON.stringify(done));
+        return isDone;
       },
 
       async getAnnouncements() {
@@ -3030,7 +3067,6 @@
             };
           });
         } catch (err) {
-          console.error("Announcements error:", err);
           return [];
         }
       },
@@ -3056,7 +3092,6 @@
             .map(d => ({ docId: d.id, ...d.data() }))
             .filter(u => u.role === 'student' || u.role === 'member');
         } catch (err) {
-          console.error("Error loading students:", err);
           return [];
         }
       },
@@ -3069,7 +3104,6 @@
             .map(d => ({ docId: d.id, ...d.data() }))
             .filter(u => u.role === 'member' || u.role === 'admin');
         } catch (err) {
-          console.error("Error loading members:", err);
           return [];
         }
       },
@@ -3099,7 +3133,6 @@
           const snap = await getDocs(collection(db, 'bookmarks', uid, 'items'));
           return snap.docs.map(d => d.id);
         } catch (err) {
-          console.error("Bookmarks fetch error:", err);
           return [];
         }
       },
@@ -3129,6 +3162,7 @@
         return await addDoc(collection(db, 'quizAttempts'), {
           studentUid: uid,
           quizId: attemptData.quizId,
+          quizTitle: attemptData.quizTitle || 'Quiz',
           score: attemptData.score,
           totalQuestions: attemptData.totalQuestions,
           answers: attemptData.answers,
@@ -3136,29 +3170,110 @@
         });
       },
 
-      async getStudentStats() {
-        const uid = activeProfile?.uid || currentAuthUser?.uid;
-        if (!uid) return { attempts: 0, avg: '0%' };
+      async getAttemptedQuizIds(targetUid) {
+        const uid = targetUid || activeProfile?.uid || currentAuthUser?.uid;
+        if (!uid) return {};
         try {
           await ensureAnonymousAuth();
           const q = query(collection(db, 'quizAttempts'), where('studentUid', '==', uid));
           const snap = await getDocs(q);
-          if (snap.empty) return { attempts: 0, avg: '0%' };
+          const map = {};
+          snap.forEach(d => {
+            const data = d.data();
+            if (!data.quizId) return;
+            const pct = data.totalQuestions > 0 ? Math.round((data.score / data.totalQuestions) * 100) : 0;
+            map[data.quizId] = { score: data.score || 0, total: data.totalQuestions || 0, pct };
+          });
+          return map;
+        } catch (err) {
+          return {};
+        }
+      },
+
+      async getLeaderboard() {
+        try {
+          await ensureAnonymousAuth();
+          const [attemptsSnap, students] = await Promise.all([
+            getDocs(collection(db, 'quizAttempts')),
+            this.getStudents()
+          ]);
+
+          const nameByUid = {};
+          students.forEach(s => { nameByUid[s.uid] = s; });
+
+          const byStudent = {};
+          attemptsSnap.forEach(d => {
+            const data = d.data();
+            const uid = data.studentUid;
+            if (!uid) return;
+            if (!byStudent[uid]) {
+              byStudent[uid] = { uid, totalScore: 0, totalQuestions: 0, quizzesTaken: 0 };
+            }
+            byStudent[uid].totalScore += (data.score || 0);
+            byStudent[uid].totalQuestions += (data.totalQuestions || 0);
+            byStudent[uid].quizzesTaken += 1;
+          });
+
+          const rows = Object.values(byStudent)
+            .filter(r => r.quizzesTaken > 0)
+            .map(r => {
+              const profile = nameByUid[r.uid];
+              const avgPct = r.totalQuestions > 0 ? Math.round((r.totalScore / r.totalQuestions) * 100) : 0;
+              return {
+                uid: r.uid,
+                name: profile?.name || 'Unknown Student',
+                course: profile?.course || '',
+                quizzesTaken: r.quizzesTaken,
+                avgPct: avgPct,
+                totalScore: r.totalScore
+              };
+            });
+
+          rows.sort((a, b) => {
+            if (b.avgPct !== a.avgPct) return b.avgPct - a.avgPct;
+            if (b.quizzesTaken !== a.quizzesTaken) return b.quizzesTaken - a.quizzesTaken;
+            return a.name.localeCompare(b.name);
+          });
+
+          rows.forEach((r, idx) => { r.rank = idx + 1; });
+          return rows;
+        } catch (err) {
+          console.error('Leaderboard fetch error:', err);
+          return [];
+        }
+      },
+
+      async getStudentStats(targetUid) {
+        const uid = targetUid || activeProfile?.uid || currentAuthUser?.uid;
+        if (!uid) return { attempts: 0, avg: '0%', items: [] };
+        try {
+          await ensureAnonymousAuth();
+          const q = query(collection(db, 'quizAttempts'), where('studentUid', '==', uid));
+          const snap = await getDocs(q);
+          if (snap.empty) return { attempts: 0, avg: '0%', items: [] };
           let totalScore = 0;
           let totalQuestions = 0;
+          const items = [];
           snap.forEach(d => {
             const data = d.data();
             totalScore += (data.score || 0);
             totalQuestions += (data.totalQuestions || 0);
+            items.push({
+              id: d.id,
+              quizTitle: data.quizTitle || 'Quiz Assessment',
+              score: data.score || 0,
+              total: data.totalQuestions || 0,
+              date: formatDateDisplay(data.submittedAt)
+            });
           });
           const avg = totalQuestions > 0 ? Math.round((totalScore / totalQuestions) * 100) : 0;
           return {
             attempts: snap.size,
-            avg: `${avg}%`
+            avg: `${avg}%`,
+            items: items
           };
         } catch (err) {
-          console.error("Student stats error:", err);
-          return { attempts: 0, avg: '0%' };
+          return { attempts: 0, avg: '0%', items: [] };
         }
       },
 
@@ -3167,12 +3282,8 @@
           await ensureAnonymousAuth();
           const docRef = doc(db, 'systemConfig', 'appAlert');
           const snap = await getDoc(docRef);
-          if (snap.exists()) {
-            return { id: snap.id, ...snap.data() };
-          }
-          return null;
+          return snap.exists() ? { id: snap.id, ...snap.data() } : null;
         } catch (err) {
-          console.error("Error fetching system alert:", err);
           return null;
         }
       },
@@ -3195,13 +3306,56 @@
       }
     };
 
+    // SHARED RESOURCE VIEW MODAL CONTROLLER (FOR BOTH PORTALS)
+    async function openResourceDetail(id) {
+      const item = await DataService.getResourceById(id);
+      if (!item) {
+        ToastService.show('Unable to find resource details.', 'error');
+        return;
+      }
+      activeOpenedResource = item;
+
+      document.getElementById('modal-res-subject').innerText = item.subject;
+      document.getElementById('modal-res-title').innerText = item.title;
+      document.getElementById('modal-res-desc').innerText = item.description || 'No additional description.';
+      document.getElementById('modal-res-filename').innerText = item.fileName || 'file_attachment';
+      document.getElementById('modal-res-uploader').innerText = item.uploadedBy || 'Faculty';
+      document.getElementById('modal-res-date').innerText = item.dateGroup;
+
+      const bookmarks = await DataService.getBookmarks();
+      const isBookmarked = bookmarks.includes(id);
+      const textSpan = document.getElementById('modal-bookmark-text');
+      if (textSpan) {
+        textSpan.innerText = isBookmarked ? 'Remove from Bookmarks' : 'Save to Bookmarks';
+        textSpan.style.color = isBookmarked ? 'var(--danger)' : '';
+      }
+
+      ModalService.open('modal-resource-detail');
+    }
+
+    function handleViewFile() {
+      if (activeOpenedResource && activeOpenedResource.fileUrl) {
+        window.open(activeOpenedResource.fileUrl, '_blank', 'noopener,noreferrer');
+      } else {
+        ToastService.show('View link not available for this resource.', 'info');
+      }
+    }
+
+    function handleDownloadFile() {
+      if (activeOpenedResource && activeOpenedResource.downloadUrl) {
+        window.open(activeOpenedResource.downloadUrl, '_blank', 'noopener,noreferrer');
+      } else if (activeOpenedResource && activeOpenedResource.fileUrl) {
+        window.open(activeOpenedResource.fileUrl, '_blank', 'noopener,noreferrer');
+      } else {
+        ToastService.show('Download link not available for this resource.', 'info');
+      }
+    }
+
     // 4. STUDENT UI CONTROLLER
     const StudentApp = {
       cachedResources: [],
       cachedBookmarks: [],
-      activeModalResourceId: null,
-      activeModalResourceItem: null,
-      currentPractice: { topic: null, qIndex: 0, selectedAnswers: [] },
+      cachedHomework: [],
       currentQuiz: { quiz: null, qIndex: 0, selectedAnswers: [], timerInterval: null, secondsLeft: 600 },
 
       async init() {
@@ -3242,7 +3396,7 @@
 
         await this.loadAndRenderHome();
         await this.loadAndRenderWork();
-        await this.loadAndRenderPractice();
+        await this.loadAndRenderHomework();
         await this.loadAndRenderQuizzes();
         await this.loadAndRenderProfile();
       },
@@ -3271,25 +3425,36 @@
         const titles = {
           home: 'Student Dashboard',
           work: 'Work & Academic Resources',
-          practice: 'Quick Practice Questions',
+          homework: 'Daily Home Work Tracker',
           quiz: 'Timed Quizzes',
+          leaderboard: 'Quiz Leaderboard',
           bookmarks: 'My Bookmarks',
           profile: 'Student Profile'
         };
         document.getElementById('student-header-title').innerText = titles[tabId] || 'Student Hub';
 
         if (tabId === 'bookmarks') this.renderBookmarksView();
+        if (tabId === 'homework') this.loadAndRenderHomework();
+        if (tabId === 'leaderboard') this.loadAndRenderLeaderboard();
+      },
+
+      openPyqSection() {
+        this.switchTab('work');
+        const filterEl = document.getElementById('work-filter-type');
+        if (filterEl) filterEl.value = 'PYQ';
+        this.filterWorkResources();
       },
 
       async loadAndRenderHome() {
-        const [resources, announcements, practiceTopics, quizzes] = await Promise.all([
+        const [resources, announcements, homeworkList, quizzes] = await Promise.all([
           DataService.getResources(),
           DataService.getAnnouncements(),
-          DataService.getPracticeTopics(),
+          DataService.getHomeworkList(),
           DataService.getQuizzes()
         ]);
 
         this.cachedResources = resources;
+        this.cachedHomework = homeworkList;
         this.cachedBookmarks = await DataService.getBookmarks();
 
         const annContainer = document.getElementById('home-announcements-area');
@@ -3319,16 +3484,31 @@
           workContainer.innerHTML = todayItems.map(item => this.createWorkCardHTML(item)).join('');
         }
 
-        const practiceContainer = document.getElementById('home-quick-practice-pills');
-        if (practiceTopics.length === 0) {
-          practiceContainer.innerHTML = `<span style="font-size:12px; color:var(--text-muted);">No practice topics available.</span>`;
+        // Render today's homework on dashboard
+        const hwContainer = document.getElementById('home-today-homework-box');
+        const doneList = DataService.getStudentCompletedHomework(activeProfile?.uid);
+        const todayHw = homeworkList.slice(0, 3);
+        if (todayHw.length === 0) {
+          hwContainer.innerHTML = `<div class="card" style="padding:16px; text-align:center; color:var(--text-muted);">No homework tasks assigned yet.</div>`;
         } else {
-          practiceContainer.innerHTML = practiceTopics.map(t => `
-            <div class="practice-pill" onclick="window.CollegeHubApp.student.startPracticeByTopic('${encodeURIComponent(t.topic)}')">
-              <span>[ ${t.subject} ]</span>
-              <span>${t.topic}</span>
-            </div>
-          `).join('');
+          hwContainer.innerHTML = todayHw.map(hw => {
+            const isChecked = doneList.includes(hw.id);
+            return `
+              <div class="homework-item-card ${isChecked ? 'completed' : ''}" onclick="window.CollegeHubApp.student.toggleHomeworkCheck('${hw.id}')">
+                <div class="hw-checkbox ${isChecked ? 'checked' : ''}">
+                  ${isChecked ? '✓' : ''}
+                </div>
+                <div style="flex:1;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
+                    <span class="badge badge-blue" style="font-size:11px;">${hw.subject}</span>
+                    <span style="font-size:11.5px; color:var(--text-muted);">${hw.dateGroup}</span>
+                  </div>
+                  <div class="homework-task-title">${hw.title}</div>
+                  <div class="homework-desc">${hw.description}</div>
+                </div>
+              </div>
+            `;
+          }).join('');
         }
 
         const quizContainer = document.getElementById('home-latest-quiz-card');
@@ -3363,7 +3543,7 @@
         const icon = iconMap[item.type] || '📁';
 
         return `
-          <div class="work-card" onclick="window.CollegeHubApp.student.openResourceDetail('${item.id}')">
+          <div class="work-card" onclick="window.CollegeHubApp.openResourceDetail('${item.id}')">
             <div class="card-header-row">
               <div style="display:flex; align-items:center; gap:10px;">
                 <div class="work-type-icon" style="background:#eff6ff;">${icon}</div>
@@ -3439,67 +3619,16 @@
         container.innerHTML = html;
       },
 
-      openResourceDetail(id) {
-        const item = this.cachedResources.find(r => r.id === id);
-        if (!item) return;
-
-        this.activeModalResourceId = id;
-        this.activeModalResourceItem = item;
-
-        document.getElementById('modal-res-subject').innerText = item.subject;
-        document.getElementById('modal-res-title').innerText = item.title;
-        document.getElementById('modal-res-desc').innerText = item.description;
-        document.getElementById('modal-res-filename').innerText = item.fileName;
-        document.getElementById('modal-res-uploader').innerText = item.uploadedBy;
-        document.getElementById('modal-res-date').innerText = item.dateGroup;
-
-        this.updateModalBookmarkButton(id);
-        ModalService.open('modal-resource-detail');
-      },
-
-      handleViewFile() {
-        const item = this.activeModalResourceItem;
-        if (item && item.fileUrl) {
-          window.open(item.fileUrl, '_blank', 'noopener,noreferrer');
-        } else {
-          ToastService.show('View link not available for this legacy resource.', 'info');
-        }
-      },
-
-      handleDownloadFile() {
-        const item = this.activeModalResourceItem;
-        const targetUrl = item?.downloadUrl || item?.fileUrl;
-
-        if (targetUrl) {
-          // InAppBrowser plugin se link system browser (Chrome/Download Manager) me trigger hoga
-          if (window.cordova && cordova.InAppBrowser) {
-            cordova.InAppBrowser.open(targetUrl, '_system');
-          } else {
-            window.open(targetUrl, '_system');
-          }
-        } else {
-          ToastService.show('Download link not available for this legacy resource.', 'info');
-        }
-      },
-
-
-      updateModalBookmarkButton(id) {
-        const isBookmarked = this.cachedBookmarks.includes(id);
-        const textSpan = document.getElementById('modal-bookmark-text');
-        if (isBookmarked) {
-          textSpan.innerText = 'Remove from Bookmarks';
-          textSpan.style.color = 'var(--danger)';
-        } else {
-          textSpan.innerText = 'Save to Bookmarks';
-          textSpan.style.color = '';
-        }
-      },
-
       async toggleBookmarkFromModal() {
-        if (!this.activeModalResourceId) return;
-        const added = await DataService.toggleBookmark(this.activeModalResourceId);
+        if (!activeOpenedResource) return;
+        const added = await DataService.toggleBookmark(activeOpenedResource.id);
         this.cachedBookmarks = await DataService.getBookmarks();
-        this.updateModalBookmarkButton(this.activeModalResourceId);
+        
+        const textSpan = document.getElementById('modal-bookmark-text');
+        if (textSpan) {
+          textSpan.innerText = added ? 'Remove from Bookmarks' : 'Save to Bookmarks';
+          textSpan.style.color = added ? 'var(--danger)' : '';
+        }
         ToastService.show(added ? 'Saved to Bookmarks' : 'Removed from Bookmarks', 'success');
         this.filterWorkResources();
         this.loadAndRenderProfile();
@@ -3521,7 +3650,7 @@
             <div class="empty-state" style="grid-column:1/-1;">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
               <h3 class="empty-title">No bookmarks yet</h3>
-              <p class="empty-desc">Bookmark assignments or notes to quickly access them in this tab.</p>
+              <p class="empty-desc">Bookmark assignments or notes to quickly access them here.</p>
             </div>
           `;
           return;
@@ -3529,127 +3658,101 @@
         container.innerHTML = saved.map(item => this.createWorkCardHTML(item)).join('');
       },
 
-      async loadAndRenderPractice() {
-        const topics = await DataService.getPracticeTopics();
-        const container = document.getElementById('practice-topics-list');
-        if (topics.length === 0) {
-          container.innerHTML = `<div class="empty-state" style="grid-column:1/-1;"><p class="empty-desc">No practice questions available.</p></div>`;
-          return;
-        }
+      // HOMEWORK CHECKLIST VIEW
+      async loadAndRenderHomework() {
+        const list = await DataService.getHomeworkList();
+        this.cachedHomework = list;
+        const container = document.getElementById('student-homework-container');
+        if (!container) return;
 
-        container.innerHTML = topics.map(t => `
-          <div class="card">
-            <div class="card-header-row">
-              <span class="badge badge-blue">${t.subject}</span>
-              <span class="badge ${t.difficulty === 'easy' ? 'badge-green' : t.difficulty === 'medium' ? 'badge-amber' : 'badge-red'}">${t.difficulty.toUpperCase()}</span>
+        if (list.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <h3 class="empty-title">No homework tasks assigned</h3>
+              <p class="empty-desc">Faculty has not added any homework yet.</p>
             </div>
-            <h3 style="font-size:15.5px; font-weight:700; margin:4px 0;">${t.topic}</h3>
-            <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">${t.questionsCount} Questions</p>
-            <button class="btn-primary" onclick="window.CollegeHubApp.student.startPracticeByTopic('${encodeURIComponent(t.topic)}')">Start Practice</button>
-          </div>
-        `).join('');
-      },
-
-      async startPracticeByTopic(encodedTopic) {
-        const topicName = decodeURIComponent(encodedTopic);
-        const topics = await DataService.getPracticeTopics();
-        const topic = topics.find(t => t.topic === topicName);
-        if (!topic || topic.questions.length === 0) {
-          ToastService.show('Questions unavailable for this topic', 'error');
+          `;
           return;
         }
 
-        this.currentPractice = {
-          topic: topic,
-          qIndex: 0,
-          selectedAnswers: new Array(topic.questions.length).fill(null)
-        };
+        const doneList = DataService.getStudentCompletedHomework(activeProfile?.uid);
 
-        this.switchTab('practice');
-        document.getElementById('practice-list-view').style.display = 'none';
-        document.getElementById('practice-result-view').style.display = 'none';
-        document.getElementById('practice-session-view').style.display = 'block';
+        // Group by Date Group (Day-by-Day)
+        const groups = {};
+        list.forEach(item => {
+          const groupTitle = item.dateGroup || 'Recent';
+          if (!groups[groupTitle]) groups[groupTitle] = [];
+          groups[groupTitle].push(item);
+        });
 
-        document.getElementById('practice-badge-subject').innerText = topic.subject;
-        document.getElementById('practice-session-title').innerText = topic.topic;
-        document.getElementById('practice-total-q').innerText = topic.questions.length;
-
-        this.renderPracticeQuestion();
-      },
-
-      renderPracticeQuestion() {
-        const { topic, qIndex, selectedAnswers } = this.currentPractice;
-        const q = topic.questions[qIndex];
-
-        document.getElementById('practice-current-q-index').innerText = qIndex + 1;
-        document.getElementById('practice-question-text').innerText = q.q;
-
-        const container = document.getElementById('practice-options-list');
-        container.innerHTML = q.options.map((opt, idx) => `
-          <div class="mcq-option ${selectedAnswers[qIndex] === idx ? 'selected' : ''}" onclick="window.CollegeHubApp.student.selectPracticeOption(${idx})">
-            <div class="mcq-radio"></div>
-            <span>${opt}</span>
-          </div>
-        `).join('');
-
-        document.getElementById('btn-practice-prev').disabled = qIndex === 0;
-        document.getElementById('btn-practice-next').innerText = qIndex === topic.questions.length - 1 ? 'Complete Practice' : 'Next Question';
-
-        const fb = document.getElementById('practice-feedback-banner');
-        if (selectedAnswers[qIndex] !== null) {
-          const isCorrect = selectedAnswers[qIndex] === q.answer;
-          fb.style.display = 'block';
-          fb.style.background = isCorrect ? 'var(--success-light)' : 'var(--danger-light)';
-          fb.style.color = isCorrect ? '#065f46' : '#991b1b';
-          fb.innerHTML = `<strong>${isCorrect ? 'Correct!' : 'Incorrect'}</strong> — ${q.explanation}`;
-        } else {
-          fb.style.display = 'none';
+        let html = '';
+        for (const [dateTitle, items] of Object.entries(groups)) {
+          html += `
+            <div class="date-group-header">
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              <span>${dateTitle}</span>
+            </div>
+            <div>
+              ${items.map(hw => {
+                const isChecked = doneList.includes(hw.id);
+                return `
+                  <div class="homework-item-card ${isChecked ? 'completed' : ''}" onclick="window.CollegeHubApp.student.toggleHomeworkCheck('${hw.id}')">
+                    <div class="hw-checkbox ${isChecked ? 'checked' : ''}">
+                      ${isChecked ? '✓' : ''}
+                    </div>
+                    <div style="flex:1;">
+                      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                        <span class="badge badge-blue">${hw.subject}</span>
+                        <span style="font-size:12px; color:var(--text-muted);">${hw.targetDate ? 'Due: ' + hw.targetDate : ''}</span>
+                      </div>
+                      <div class="homework-task-title">${hw.title}</div>
+                      <div class="homework-desc">${hw.description}</div>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          `;
         }
+        container.innerHTML = html;
       },
 
-      selectPracticeOption(idx) {
-        this.currentPractice.selectedAnswers[this.currentPractice.qIndex] = idx;
-        this.renderPracticeQuestion();
-      },
-
-      navPracticeQuestion(delta) {
-        const { topic, qIndex } = this.currentPractice;
-        const next = qIndex + delta;
-        if (next >= 0 && next < topic.questions.length) {
-          this.currentPractice.qIndex = next;
-          this.renderPracticeQuestion();
-        } else if (next >= topic.questions.length) {
-          let correct = 0;
-          topic.questions.forEach((q, i) => {
-            if (this.currentPractice.selectedAnswers[i] === q.answer) correct++;
-          });
-          const total = topic.questions.length;
-          const pct = Math.round((correct / total) * 100);
-
-          document.getElementById('practice-session-view').style.display = 'none';
-          document.getElementById('practice-result-view').style.display = 'block';
-          document.getElementById('practice-res-pct').innerText = `${pct}%`;
-          document.getElementById('practice-res-correct').innerText = correct;
-          document.getElementById('practice-res-wrong').innerText = total - correct;
-          document.getElementById('practice-score-circle').style.setProperty('--score-pct', pct);
-        }
-      },
-
-      exitPractice() {
-        document.getElementById('practice-session-view').style.display = 'none';
-        document.getElementById('practice-result-view').style.display = 'none';
-        document.getElementById('practice-list-view').style.display = 'block';
+      toggleHomeworkCheck(hwId) {
+        const isDone = DataService.toggleStudentHomeworkDone(hwId, activeProfile?.uid);
+        ToastService.show(isDone ? 'Task marked as completed! ✓' : 'Task marked as pending', 'info');
+        this.loadAndRenderHomework();
+        this.loadAndRenderHome();
       },
 
       async loadAndRenderQuizzes() {
-        const quizzes = await DataService.getQuizzes();
+        const [quizzes, attemptedMap] = await Promise.all([
+          DataService.getQuizzes(),
+          DataService.getAttemptedQuizIds()
+        ]);
+        this.cachedAttemptedMap = attemptedMap;
         const container = document.getElementById('quiz-cards-catalog');
         if (quizzes.length === 0) {
           container.innerHTML = `<div class="empty-state" style="grid-column:1/-1;"><p class="empty-desc">No quizzes published yet.</p></div>`;
           return;
         }
 
-        container.innerHTML = quizzes.map(q => `
+        container.innerHTML = quizzes.map(q => {
+          const attempt = attemptedMap[q.id];
+          if (attempt) {
+            return `
+              <div class="card">
+                <div class="card-header-row">
+                  <span class="badge badge-purple">${q.subject}</span>
+                  <span class="badge badge-green">Completed</span>
+                </div>
+                <h3 style="font-size:16px; font-weight:700; margin:6px 0 2px 0;">${q.title}</h3>
+                <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:14px;">You scored ${attempt.score} / ${attempt.total} (${attempt.pct}%)</p>
+                <button class="btn-secondary" style="background-color: #007BFF; color: white; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer;" onclick="window.CollegeHubApp.student.switchTab('leaderboard')">View Leaderboard</button>
+              </div>
+            `;
+          }
+          return `
           <div class="card">
             <div class="card-header-row">
               <span class="badge badge-purple">${q.subject}</span>
@@ -3659,10 +3762,18 @@
             <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:14px;">${q.questionsCount} Multiple Choice Questions</p>
             <button class="btn-primary" onclick="window.CollegeHubApp.student.startQuizById('${q.id}')">Start Quiz</button>
           </div>
-        `).join('');
+        `;
+        }).join('');
       },
 
       async startQuizById(id) {
+        const attemptedMap = await DataService.getAttemptedQuizIds();
+        if (attemptedMap[id]) {
+          ToastService.show('You already completed this quiz. Check the Leaderboard!', 'info');
+          this.loadAndRenderQuizzes();
+          return;
+        }
+
         const quizzes = await DataService.getQuizzes();
         const quiz = quizzes.find(q => q.id === id);
         if (!quiz || quiz.questions.length === 0) {
@@ -3772,6 +3883,7 @@
 
         await DataService.saveQuizAttempt({
           quizId: quiz.id,
+          quizTitle: quiz.title,
           score: correct,
           totalQuestions: total,
           answers: selectedAnswers
@@ -3793,6 +3905,7 @@
         document.getElementById('quiz-session-view').style.display = 'none';
         document.getElementById('quiz-result-view').style.display = 'none';
         document.getElementById('quiz-list-view').style.display = 'block';
+        this.loadAndRenderQuizzes();
       },
 
       async loadAndRenderProfile() {
@@ -3803,11 +3916,56 @@
         document.getElementById('profile-quiz-count').innerText = stats.attempts;
         document.getElementById('profile-quiz-avg').innerText = stats.avg;
         document.getElementById('profile-bookmark-count').innerText = bookmarks.length;
+      },
+
+      async loadAndRenderLeaderboard() {
+        const container = document.getElementById('leaderboard-list-container');
+        const myRankBanner = document.getElementById('leaderboard-my-rank-banner');
+        if (!container) return;
+
+        container.innerHTML = `<div style="font-size:12.5px; color:var(--text-muted); text-align:center; padding:20px;">Loading leaderboard...</div>`;
+
+        const rows = await DataService.getLeaderboard();
+        const myUid = activeProfile?.uid || currentAuthUser?.uid;
+
+        if (rows.length === 0) {
+          container.innerHTML = `<div class="empty-state"><p class="empty-desc">No quiz attempts recorded yet. Be the first to take a quiz!</p></div>`;
+          if (myRankBanner) myRankBanner.style.display = 'none';
+          return;
+        }
+
+        const medal = (rank) => rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : `#${rank}`;
+
+        container.innerHTML = rows.map(r => `
+          <div class="card" style="display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 16px; ${r.uid === myUid ? 'border:2px solid var(--primary); background:var(--primary-light);' : ''}">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="font-size:18px; font-weight:800; min-width:34px; text-align:center;">${medal(r.rank)}</div>
+              <div>
+                <div style="font-size:14px; font-weight:700; color:var(--text-main);">${r.name}${r.uid === myUid ? ' (You)' : ''}</div>
+                <div style="font-size:11.5px; color:var(--text-muted);">${r.course || 'Student'} • ${r.quizzesTaken} quiz${r.quizzesTaken === 1 ? '' : 'zes'} taken</div>
+              </div>
+            </div>
+            <div style="font-size:16px; font-weight:800; color:var(--primary);">${r.avgPct}%</div>
+          </div>
+        `).join('');
+
+        if (myRankBanner) {
+          const mine = rows.find(r => r.uid === myUid);
+          if (mine) {
+            myRankBanner.style.display = 'block';
+            myRankBanner.innerText = `Your Rank: #${mine.rank} of ${rows.length} • Average Score: ${mine.avgPct}%`;
+          } else {
+            myRankBanner.style.display = 'block';
+            myRankBanner.innerText = `You haven't completed any quizzes yet — take one to join the leaderboard!`;
+          }
+        }
       }
     };
 
     // 5. ADMIN & MEMBER UI CONTROLLER
     const AdminApp = {
+      quizQuestionCount: 1,
+
       async init() {
         const isSuperAdmin = activeProfile?.role === 'admin';
 
@@ -3837,7 +3995,7 @@
           this.renderDashboardStats(),
           this.renderResourcesTable(),
           this.renderQuizzes(),
-          this.renderPracticeCatalog(),
+          this.renderHomeworkCatalog(),
           this.renderAnnouncements(),
           isSuperAdmin ? this.renderStudents() : Promise.resolve(),
           isSuperAdmin ? this.renderMembers() : Promise.resolve()
@@ -3871,18 +4029,24 @@
         const titles = {
           dashboard: activeProfile?.role === 'admin' ? 'Admin Dashboard' : 'Staff Dashboard',
           resources: 'Resource Management',
+          homework: 'Daily Home Work Assignments',
           quizzes: 'Quiz Curriculum Management',
-          practice: 'Practice Question Bank',
           announcements: 'Campus Notice Board',
           broadcast: 'System Broadcast & App Updates',
-          students: 'Student Directory & Roles',
+          students: 'Student Directory & Performance Records',
           members: 'Staff & Members'
         };
         document.getElementById('admin-header-title').innerText = titles[tabId] || 'Admin Hub';
 
-        if (tabId === 'broadcast') {
-          this.loadBroadcastForm();
-        }
+        if (tabId === 'broadcast') this.loadBroadcastForm();
+        if (tabId === 'homework') this.renderHomeworkCatalog();
+      },
+
+      openPyqSection() {
+        this.switchTab('resources');
+        const filterEl = document.getElementById('admin-resources-filter-type');
+        if (filterEl) filterEl.value = 'PYQ';
+        this.renderResourcesTable();
       },
 
       async loadBroadcastForm() {
@@ -3948,24 +4112,15 @@
 
         const btn = document.getElementById('btn-save-broadcast');
         btn.disabled = true;
-        btn.innerText = 'Saving to Firestore Cloud...';
+        btn.innerText = 'Saving to Cloud...';
 
         try {
           await DataService.saveSystemAlert({
-            isActive,
-            type,
-            audience,
-            title,
-            message,
-            actionUrl,
-            buttonText,
-            isMandatory
+            isActive, type, audience, title, message, actionUrl, buttonText, isMandatory
           });
-
-          ToastService.show(isActive ? 'Full-screen broadcast activated in real-time!' : 'Broadcast disabled successfully.', 'success');
+          ToastService.show(isActive ? 'Full-screen broadcast active in real-time!' : 'Broadcast disabled.', 'success');
           this.loadBroadcastForm();
         } catch (err) {
-          console.error("Broadcast save error:", err);
           ToastService.show('Failed to save alert: ' + err.message, 'error');
         } finally {
           btn.disabled = false;
@@ -3977,20 +4132,13 @@
         const type = document.getElementById('broadcast-type').value;
         const audience = document.getElementById('broadcast-audience').value;
         const title = document.getElementById('broadcast-title').value.trim() || 'College Hub Update Preview';
-        const message = document.getElementById('broadcast-message').value.trim() || 'This is a live preview of how the alert will appear to students on mobile and desktop devices.';
+        const message = document.getElementById('broadcast-message').value.trim() || 'Live preview for student screens.';
         const actionUrl = document.getElementById('broadcast-action-url').value.trim() || '#';
         const buttonText = document.getElementById('broadcast-btn-text').value.trim() || 'Open Link';
         const isMandatory = document.getElementById('broadcast-is-mandatory').checked;
 
         renderSystemAlertModal({
-          isActive: true,
-          type,
-          audience,
-          title,
-          message,
-          actionUrl,
-          buttonText,
-          isMandatory
+          isActive: true, type, audience, title, message, actionUrl, buttonText, isMandatory
         }, true);
       },
 
@@ -4000,20 +4148,19 @@
       },
 
       async renderDashboardStats() {
-        const [students, resources, quizzes, practiceTopics, alertConfig] = await Promise.all([
+        const [students, resources, quizzes, homeworkList, alertConfig] = await Promise.all([
           DataService.getStudents(),
           DataService.getResources(),
           DataService.getQuizzes(),
-          DataService.getPracticeTopics(),
+          DataService.getHomeworkList(),
           DataService.getSystemAlert()
         ]);
 
         document.getElementById('admin-stat-students').innerText = students.length;
         document.getElementById('admin-stat-resources').innerText = resources.length;
         document.getElementById('admin-stat-quizzes').innerText = quizzes.length;
-        document.getElementById('admin-stat-practice').innerText = practiceTopics.reduce((acc, t) => acc + t.questionsCount, 0);
+        document.getElementById('admin-stat-homework').innerText = homeworkList.length;
 
-        // Update dashboard broadcast status pill
         const pill = document.getElementById('dash-broadcast-status-pill');
         if (pill) {
           if (alertConfig && alertConfig.isActive) {
@@ -4044,7 +4191,10 @@
       },
 
       async renderResourcesTable() {
-        const resources = await DataService.getResources();
+        const allResources = await DataService.getResources();
+        const filterEl = document.getElementById('admin-resources-filter-type');
+        const filterType = filterEl ? filterEl.value : 'ALL';
+        const resources = filterType === 'ALL' ? allResources : allResources.filter(r => r.type === filterType);
         const tbody = document.getElementById('admin-resources-table-body');
         if (resources.length === 0) {
           tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:24px; color:var(--text-muted);">No study resources in Firestore. Click "+ Upload Resource" above to add one.</td></tr>`;
@@ -4063,7 +4213,7 @@
               <span class="badge ${res.retention === 'Permanent' ? 'badge-green' : 'badge-amber'}">${res.retention}</span>
             </td>
             <td style="text-align:right;">
-              <button class="btn-secondary btn-sm" onclick="window.CollegeHubApp.student.openResourceDetail('${res.id}')">View</button>
+              <button class="btn-secondary btn-sm" onclick="window.CollegeHubApp.openResourceDetail('${res.id}')">View</button>
               ${isSuperAdmin ? `<button class="btn-secondary btn-sm" style="color:var(--danger);" onclick="window.CollegeHubApp.admin.promptDeleteResource('${res.id}', '${res.fileId || ''}')">Delete</button>` : ''}
             </td>
           </tr>
@@ -4078,13 +4228,9 @@
             try {
               let targetFileId = fileId;
               if (!targetFileId) {
-                try {
-                  const docSnap = await getDoc(doc(db, 'resources', id));
-                  if (docSnap.exists()) {
-                    targetFileId = docSnap.data().fileId || '';
-                  }
-                } catch (lookupErr) {
-                  console.warn("Could not lookup fileId from doc:", lookupErr);
+                const docSnap = await getDoc(doc(db, 'resources', id));
+                if (docSnap.exists()) {
+                  targetFileId = docSnap.data().fileId || '';
                 }
               }
               await DataService.deleteResource(id, targetFileId);
@@ -4122,17 +4268,11 @@
         progressText.innerText = `Uploading "${chosenFile.name}" to Google Drive...`;
 
         try {
-          // Upload directly to Google Drive proxy
           const driveResult = await uploadToGoogleDrive(chosenFile);
-
           progressText.innerText = 'Saving metadata to Firestore...';
 
-          // Save link and metadata in Cloud Firestore
           await DataService.saveResource({
-            title,
-            subject,
-            type,
-            description: desc,
+            title, subject, type, description: desc,
             fileName: driveResult.fileName || chosenFile.name,
             fileUrl: driveResult.viewUrl,
             downloadUrl: driveResult.downloadUrl,
@@ -4140,22 +4280,143 @@
             retention
           });
 
-          // Reset inputs
           document.getElementById('addres-title').value = '';
           document.getElementById('addres-desc').value = '';
           fileInput.value = '';
 
           ModalService.close('modal-add-resource');
-          ToastService.show('File uploaded to Drive & published to Firestore!', 'success');
+          ToastService.show('File uploaded to Drive & published!', 'success');
           this.renderResourcesTable();
           this.renderDashboardStats();
         } catch (err) {
-          console.error("Resource upload error:", err);
           ToastService.show('Upload failed: ' + err.message, 'error');
         } finally {
           btn.disabled = false;
           btn.innerText = 'Publish & Upload to Drive';
           progressBox.style.display = 'none';
+        }
+      },
+
+      // HOMEWORK (ADMIN)
+      async renderHomeworkCatalog() {
+        const list = await DataService.getHomeworkList();
+        const container = document.getElementById('admin-homework-catalog');
+        if (!container) return;
+
+        if (list.length === 0) {
+          container.innerHTML = `<div class="empty-state"><p class="empty-desc">No home work tasks assigned. Click "+ Add Home Work" above to assign one.</p></div>`;
+          return;
+        }
+
+        container.innerHTML = list.map(hw => `
+          <div class="card" style="margin-bottom:12px;">
+            <div class="card-header-row">
+              <div>
+                <span class="badge badge-blue">${hw.subject}</span>
+                <span class="badge badge-gray" style="margin-left:6px;">${hw.dateGroup}</span>
+              </div>
+              <button class="btn-secondary btn-sm" style="color:var(--danger);" onclick="window.CollegeHubApp.admin.promptDeleteHomework('${hw.id}')">Delete</button>
+            </div>
+            <h4 style="font-size:15px; font-weight:700; margin:4px 0 2px 0;">${hw.title}</h4>
+            <div style="font-size:13px; color:var(--text-muted); margin-bottom:6px;">${hw.description}</div>
+            ${hw.targetDate ? `<div style="font-size:11.5px; font-weight:600; color:var(--text-light);">Target Due Date: ${hw.targetDate}</div>` : ''}
+          </div>
+        `).join('');
+      },
+
+      async handleCreateHomework() {
+        const title = document.getElementById('hw-title').value.trim();
+        const subject = document.getElementById('hw-subject').value;
+        const targetDate = document.getElementById('hw-date').value;
+        const description = document.getElementById('hw-desc').value.trim();
+
+        const btn = document.getElementById('btn-submit-homework');
+        btn.disabled = true;
+
+        try {
+          await DataService.saveHomework({ title, subject, targetDate, description });
+          ModalService.close('modal-add-homework');
+          ToastService.show('Home work published to students!', 'success');
+          
+          document.getElementById('hw-title').value = '';
+          document.getElementById('hw-desc').value = '';
+          document.getElementById('hw-date').value = '';
+
+          this.renderHomeworkCatalog();
+          this.renderDashboardStats();
+        } catch (err) {
+          ToastService.show('Error saving homework: ' + err.message, 'error');
+        } finally {
+          btn.disabled = false;
+        }
+      },
+
+      promptDeleteHomework(id) {
+        ModalService.confirm(
+          'Delete Home Work Task?',
+          'Are you sure you want to remove this home work assignment?',
+          async () => {
+            try {
+              await DataService.deleteHomework(id);
+              ToastService.show('Home work task deleted.', 'info');
+              AdminApp.renderHomeworkCatalog();
+              AdminApp.renderDashboardStats();
+            } catch (err) {
+              ToastService.show('Error deleting: ' + err.message, 'error');
+            }
+          }
+        );
+      },
+
+      // QUIZ MANAGEMENT (MULTI-QUESTION + DELETE)
+      openCreateQuizModal() {
+        this.quizQuestionCount = 1;
+        document.getElementById('quiz-builder-count').innerText = '1';
+        const container = document.getElementById('quiz-questions-builder-container');
+        container.innerHTML = this.renderSingleQuestionFieldHTML(1);
+        ModalService.open('modal-create-quiz');
+      },
+
+      renderSingleQuestionFieldHTML(num) {
+        return `
+          <div class="card quiz-q-field-card" data-qindex="${num}" style="background:var(--bg-subtle); padding:14px; position:relative;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <strong style="font-size:13px; color:var(--text-main);">Question #${num}</strong>
+              ${num > 1 ? `<button type="button" class="btn-secondary btn-sm" style="color:var(--danger); padding:2px 8px;" onclick="window.CollegeHubApp.admin.removeQuizQuestionField(${num})">Remove</button>` : ''}
+            </div>
+            <input type="text" class="form-control builder-q-text" placeholder="Question statement..." required style="margin-bottom:8px;" />
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+              <input type="text" class="form-control builder-opt-0" placeholder="Option A" required />
+              <input type="text" class="form-control builder-opt-1" placeholder="Option B" required />
+              <input type="text" class="form-control builder-opt-2" placeholder="Option C" required />
+              <input type="text" class="form-control builder-opt-3" placeholder="Option D" required />
+            </div>
+            <div class="form-group" style="margin-top:8px; margin-bottom:0;">
+              <label class="form-label" style="font-size:11.5px;">Correct Answer Option</label>
+              <select class="form-control builder-correct-idx">
+                <option value="0">Option A</option>
+                <option value="1">Option B</option>
+                <option value="2">Option C</option>
+                <option value="3">Option D</option>
+              </select>
+            </div>
+          </div>
+        `;
+      },
+
+      addQuizQuestionField() {
+        this.quizQuestionCount++;
+        document.getElementById('quiz-builder-count').innerText = this.quizQuestionCount;
+        const container = document.getElementById('quiz-questions-builder-container');
+        container.insertAdjacentHTML('beforeend', this.renderSingleQuestionFieldHTML(this.quizQuestionCount));
+      },
+
+      removeQuizQuestionField(num) {
+        const card = document.querySelector(`.quiz-q-field-card[data-qindex="${num}"]`);
+        if (card) {
+          card.remove();
+          this.quizQuestionCount = document.querySelectorAll('.quiz-q-field-card').length;
+          document.getElementById('quiz-builder-count').innerText = this.quizQuestionCount;
         }
       },
 
@@ -4174,9 +4435,30 @@
               <span class="badge badge-gray">${q.durationMins} Mins</span>
             </div>
             <h4 style="font-size:15px; font-weight:700; margin:4px 0;">${q.title}</h4>
-            <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:10px;">${q.questions.length} Questions active</p>
+            <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">${q.questions.length} Questions active</p>
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+              <span class="badge badge-green">Marks: ${q.totalMarks}</span>
+              <button class="btn-secondary btn-sm" style="color:var(--danger);" onclick="window.CollegeHubApp.admin.promptDeleteQuiz('${q.id}')">Delete Quiz</button>
+            </div>
           </div>
         `).join('');
+      },
+
+      promptDeleteQuiz(quizId) {
+        ModalService.confirm(
+          'Delete Quiz?',
+          'Are you sure you want to delete this quiz? Students will no longer be able to attempt it.',
+          async () => {
+            try {
+              await DataService.deleteQuiz(quizId);
+              ToastService.show('Quiz removed successfully.', 'info');
+              AdminApp.renderQuizzes();
+              AdminApp.renderDashboardStats();
+            } catch (err) {
+              ToastService.show('Error deleting quiz: ' + err.message, 'error');
+            }
+          }
+        );
       },
 
       async handleCreateQuiz() {
@@ -4185,86 +4467,48 @@
         const duration = parseInt(document.getElementById('quizcreate-duration').value, 10);
         const marks = parseInt(document.getElementById('quizcreate-marks').value, 10);
 
-        const q1Text = document.getElementById('quizcreate-q1').value.trim();
-        const optA = document.getElementById('quizcreate-opta').value.trim();
-        const optB = document.getElementById('quizcreate-optb').value.trim();
-        const optC = document.getElementById('quizcreate-optc').value.trim();
-        const optD = document.getElementById('quizcreate-optd').value.trim();
-        const correctIdx = parseInt(document.getElementById('quizcreate-correct').value, 10);
+        const questionCards = document.querySelectorAll('.quiz-q-field-card');
+        if (questionCards.length === 0) {
+          ToastService.show('Please add at least one question.', 'error');
+          return;
+        }
+
+        const questions = [];
+        for (const card of questionCards) {
+          const qText = card.querySelector('.builder-q-text').value.trim();
+          const a = card.querySelector('.builder-opt-0').value.trim();
+          const b = card.querySelector('.builder-opt-1').value.trim();
+          const c = card.querySelector('.builder-opt-2').value.trim();
+          const d = card.querySelector('.builder-opt-3').value.trim();
+          const correct = parseInt(card.querySelector('.builder-correct-idx').value, 10);
+
+          if (!qText || !a || !b || !c || !d) {
+            ToastService.show('Please fill in all options for all questions.', 'error');
+            return;
+          }
+
+          questions.push({
+            q: qText,
+            options: [a, b, c, d],
+            answer: correct
+          });
+        }
 
         const btn = document.getElementById('btn-submit-quiz');
         btn.disabled = true;
 
         try {
           await DataService.saveQuiz({
-            title, subject, durationMins: duration, totalMarks: marks,
-            questions: [{
-              q: q1Text,
-              options: [optA, optB, optC, optD],
-              answer: correctIdx
-            }]
+            title, subject, durationMins: duration, totalMarks: marks, questions
           });
           ModalService.close('modal-create-quiz');
-          ToastService.show('Quiz written to Firestore', 'success');
+          ToastService.show(`Quiz saved with ${questions.length} questions!`, 'success');
           this.renderQuizzes();
           this.renderDashboardStats();
         } catch (err) {
           ToastService.show('Error creating quiz: ' + err.message, 'error');
         } finally {
           btn.disabled = false;
-        }
-      },
-
-      async renderPracticeCatalog() {
-        const topics = await DataService.getPracticeTopics();
-        const container = document.getElementById('admin-practice-catalog');
-        if (topics.length === 0) {
-          container.innerHTML = `<div class="empty-state" style="grid-column:1/-1;"><p class="empty-desc">No practice questions in bank.</p></div>`;
-          return;
-        }
-
-        container.innerHTML = topics.map(t => `
-          <div class="card">
-            <div class="card-header-row">
-              <span class="badge badge-blue">${t.subject}</span>
-              <span class="badge badge-amber">${t.difficulty.toUpperCase()}</span>
-            </div>
-            <h4 style="font-size:15px; font-weight:700;">${t.topic}</h4>
-            <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:8px;">${t.questionsCount} Bank Questions</p>
-          </div>
-        `).join('');
-      },
-
-      async handleCreatePractice() {
-        const q = document.getElementById('prac-create-q').value.trim();
-        const subject = document.getElementById('prac-create-subject').value;
-        const topic = document.getElementById('prac-create-topic').value.trim();
-        const diff = document.getElementById('prac-create-diff').value;
-        const rawOpts = document.getElementById('prac-create-opts').value.split(',').map(s => s.trim());
-        const ans = document.getElementById('prac-create-answer').value.trim();
-        const exp = document.getElementById('prac-create-exp').value.trim();
-
-        let ansIdx = 0;
-        const foundIdx = rawOpts.indexOf(ans);
-        if (foundIdx !== -1) ansIdx = foundIdx;
-        else if (!isNaN(parseInt(ans, 10))) ansIdx = parseInt(ans, 10);
-
-        try {
-          await DataService.savePracticeQuestion({
-            question: q,
-            subject,
-            topic,
-            difficulty: diff,
-            options: rawOpts,
-            answerIndex: ansIdx,
-            explanation: exp
-          });
-          ModalService.close('modal-add-practice');
-          ToastService.show('Question stored in Firestore', 'success');
-          this.renderPracticeCatalog();
-          this.renderDashboardStats();
-        } catch (err) {
-          ToastService.show('Error: ' + err.message, 'error');
         }
       },
 
@@ -4305,6 +4549,7 @@
         }
       },
 
+      // STUDENT DIRECTORY & PROFILE STATS
       async renderStudents() {
         const students = await DataService.getStudents();
         const tbody = document.getElementById('admin-students-table-body');
@@ -4316,7 +4561,11 @@
         tbody.innerHTML = students.map(s => `
           <tr>
             <td><strong>${s.studentId || (s.uid ? s.uid.substring(0, 8) : 'N/A')}</strong></td>
-            <td>${s.name || 'Unnamed'}</td>
+            <td>
+              <span style="font-weight:600; cursor:pointer; color:var(--primary);" onclick="window.CollegeHubApp.admin.openStudentProfileModal('${s.uid || s.docId}', '${encodeURIComponent(JSON.stringify(s))}')">
+                ${s.name || 'Unnamed'}
+              </span>
+            </td>
             <td>${s.email || '-'}</td>
             <td>${s.course || 'BCA'} Sem ${s.semester || 1}</td>
             <td>
@@ -4335,13 +4584,58 @@
             <td>
               <span class="badge ${s.isActive !== false ? 'badge-green' : 'badge-red'}">${s.isActive !== false ? 'Active' : 'Disabled'}</span>
             </td>
-            <td style="text-align:right;">
-              <button class="btn-secondary btn-sm" onclick="window.CollegeHubApp.admin.toggleStudent('${s.docId}', '${s.isActive !== false ? 'Active' : 'Disabled'}')">
+            <td style="text-align:right; white-space:nowrap;">
+              <button class="btn-primary btn-sm" style="display:inline-flex; padding:4px 8px;" onclick="window.CollegeHubApp.admin.openStudentProfileModal('${s.uid || s.docId}', '${encodeURIComponent(JSON.stringify(s))}')">
+                Profile / Scores
+              </button>
+              <button class="btn-secondary btn-sm" style="margin-left:4px;" onclick="window.CollegeHubApp.admin.toggleStudent('${s.docId}', '${s.isActive !== false ? 'Active' : 'Disabled'}')">
                 ${s.isActive !== false ? 'Disable' : 'Enable'}
               </button>
             </td>
           </tr>
         `).join('');
+      },
+
+      async openStudentProfileModal(uid, encodedData) {
+        let studentData = {};
+        try {
+          studentData = JSON.parse(decodeURIComponent(encodedData));
+        } catch (e) {
+          studentData = {};
+        }
+
+        document.getElementById('admin-view-stud-name').innerText = studentData.name || 'Student Profile';
+        document.getElementById('admin-view-stud-id').innerText = studentData.studentId || '-';
+        document.getElementById('admin-view-stud-course').innerText = `${studentData.course || 'BCA'} Semester ${studentData.semester || 1}`;
+        document.getElementById('admin-view-stud-email').innerText = studentData.email || 'N/A';
+
+        const statsBox = document.getElementById('admin-view-stud-attempts');
+        const avgBox = document.getElementById('admin-view-stud-avg');
+        const listContainer = document.getElementById('admin-view-stud-quiz-list');
+
+        statsBox.innerText = '...';
+        avgBox.innerText = '...';
+        listContainer.innerHTML = `<div style="text-align:center; padding:12px; font-size:12px; color:var(--text-muted);">Fetching score records from Firestore...</div>`;
+
+        ModalService.open('modal-admin-student-profile');
+
+        const stats = await DataService.getStudentStats(studentData.uid || uid);
+        statsBox.innerText = stats.attempts;
+        avgBox.innerText = stats.avg;
+
+        if (!stats.items || stats.items.length === 0) {
+          listContainer.innerHTML = `<div style="text-align:center; padding:16px; color:var(--text-muted); font-size:12.5px;">No quiz attempts logged for this student yet.</div>`;
+        } else {
+          listContainer.innerHTML = stats.items.map(it => `
+            <div class="card" style="padding:10px 14px; background:var(--bg-surface); display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <strong style="font-size:13.5px;">${it.quizTitle}</strong>
+                <div style="font-size:11px; color:var(--text-muted);">${it.date}</div>
+              </div>
+              <span class="badge badge-green" style="font-size:13px; font-weight:700;">${it.score} / ${it.total}</span>
+            </div>
+          `).join('');
+        }
       },
 
       async changeRole(docId, newRole) {
@@ -4351,7 +4645,7 @@
         }
         try {
           await DataService.updateStudentRole(docId, newRole);
-          ToastService.show(`Role successfully updated to ${newRole.toUpperCase()}!`, 'success');
+          ToastService.show(`Role updated to ${newRole.toUpperCase()}!`, 'success');
           this.renderStudents();
           this.renderMembers();
         } catch (err) {
@@ -4415,11 +4709,7 @@
           }
 
           await addDoc(collection(db, 'users'), {
-            name,
-            staffId,
-            role,
-            email,
-            password: pwd,
+            name, staffId, role, email, password: pwd,
             isActive: true,
             createdAt: serverTimestamp(),
             updatedAt: serverTimestamp()
@@ -4506,7 +4796,7 @@
         }
 
         if (matched.isActive === false) {
-          ToastService.show('Account disabled by Administrator. Contact college staff.', 'error');
+          ToastService.show('Account disabled by Administrator.', 'error');
           return;
         }
 
@@ -4528,12 +4818,7 @@
         }
 
       } catch (err) {
-        console.error("Login exception:", err);
-        if (err.message && err.message.includes('permissions')) {
-          ToastService.show('Firestore rules block access. Please update Firestore Rules in Firebase Console.', 'error');
-        } else {
-          ToastService.show('Login failed: ' + err.message, 'error');
-        }
+        ToastService.show('Login failed: ' + err.message, 'error');
       } finally {
         btn.disabled = false;
         btn.innerText = 'Sign In to Student Hub';
@@ -4554,7 +4839,6 @@
 
       try {
         const user = await ensureAnonymousAuth();
-
         const usersRef = collection(db, 'users');
         let isDuplicate = false;
         try {
@@ -4566,7 +4850,7 @@
             }
           });
         } catch (permErr) {
-          console.warn("Could not pre-check duplicate users collection:", permErr);
+          console.warn("Could not pre-check duplicate users:", permErr);
         }
 
         if (isDuplicate) {
@@ -4576,12 +4860,7 @@
 
         const newProfile = {
           uid: user.uid,
-          name,
-          studentId,
-          course,
-          semester,
-          email,
-          password,
+          name, studentId, course, semester, email, password,
           role: 'student',
           isActive: true,
           createdAt: serverTimestamp(),
@@ -4599,12 +4878,7 @@
         StudentApp.init();
 
       } catch (err) {
-        console.error("Registration error:", err);
-        if (err.message && err.message.includes('permissions')) {
-          ToastService.show('Firestore Security Rules: Missing or insufficient permissions. Update rules in Firebase console.', 'error');
-        } else {
-          ToastService.show('Registration failed: ' + err.message, 'error');
-        }
+        ToastService.show('Registration failed: ' + err.message, 'error');
       } finally {
         btn.disabled = false;
         btn.innerText = 'Create Student Account';
@@ -4618,7 +4892,7 @@
       const btn = document.getElementById('btn-secret-login');
 
       btn.disabled = true;
-      btn.innerText = 'Verifying Authority with Firebase...';
+      btn.innerText = 'Verifying Authority...';
 
       try {
         const user = await ensureAnonymousAuth();
@@ -4649,7 +4923,7 @@
               updatedAt: serverTimestamp()
             }, { merge: true });
           } catch (syncErr) {
-            console.warn("Could not sync master admin doc to Firestore:", syncErr);
+            console.warn("Could not sync master admin doc:", syncErr);
           }
 
         } else if (isDemoAdmin) {
@@ -4675,7 +4949,7 @@
               }
             });
           } catch (e) {
-            console.warn("Could not query users collection for staff:", e);
+            console.warn("Staff query note:", e);
           }
         }
 
@@ -4723,7 +4997,7 @@
       switchAuthTab('login');
     }
 
-    // 7. REALTIME FULL-SCREEN SYSTEM ALERT LISTENER (METHOD 1)
+    // 7. REALTIME SYSTEM ALERT MODAL
     let currentLiveAlert = null;
 
     function renderSystemAlertModal(data, isPreview = false) {
@@ -4742,7 +5016,6 @@
 
       currentLiveAlert = data;
 
-      // Check session dismissal state if not mandatory
       if (!isPreview && !data.isMandatory) {
         const sessionDismissed = sessionStorage.getItem('ch_dismissed_alert_' + (data.updatedAt?.seconds || 'active'));
         if (sessionDismissed === 'true') {
@@ -4751,7 +5024,6 @@
         }
       }
 
-      // Configure badge & icon styling
       if (data.type === 'urgent') {
         badge.className = 'badge badge-red';
         badge.innerText = '🚨 Urgent Campus Notice';
@@ -4769,11 +5041,9 @@
       title.innerText = data.title || 'College Hub Notification';
       audience.innerText = data.audience ? `Notice for: ${data.audience}` : 'Notice for All Students & Faculty';
       msg.innerText = data.message || '';
-      
       actionBtn.href = data.actionUrl || '#';
       btnText.innerText = data.buttonText || 'Take Action';
 
-      // Mandatory / Force Action toggle handling
       if (data.isMandatory) {
         dismissBtn.style.display = 'none';
         mandatoryNote.style.display = 'block';
@@ -4791,12 +5061,10 @@
         const alertKey = currentLiveAlert.updatedAt?.seconds || 'active';
         sessionStorage.setItem('ch_dismissed_alert_' + alertKey, 'true');
       }
-      if (overlay) {
-        overlay.classList.remove('active');
-      }
+      if (overlay) overlay.classList.remove('active');
     }
 
-    // 7.5 OFFLINE & ONLINE NETWORK MONITOR
+    // 8. OFFLINE & ONLINE NETWORK MONITOR
     let isCurrentlyOffline = !navigator.onLine;
 
     function handleNetworkChange(isOnline, isManualCheck = false) {
@@ -4825,7 +5093,6 @@
       if (btnText) btnText.innerText = 'Checking network...';
       if (btnIcon) btnIcon.style.animation = 'spin 0.8s linear infinite';
 
-      // Perform real internet verification check
       setTimeout(() => {
         if (btn) btn.disabled = false;
         if (btnIcon) btnIcon.style.animation = '';
@@ -4834,7 +5101,7 @@
         if (navigator.onLine) {
           handleNetworkChange(true, true);
         } else {
-          ToastService.show('Still offline. Please check your connection and try again.', 'error');
+          ToastService.show('Still offline. Please check your connection.', 'error');
         }
       }, 700);
     }
@@ -4842,11 +5109,7 @@
     function initNetworkMonitor() {
       window.addEventListener('online', () => handleNetworkChange(true));
       window.addEventListener('offline', () => handleNetworkChange(false));
-
-      // Initial check on load
-      if (!navigator.onLine) {
-        handleNetworkChange(false);
-      }
+      if (!navigator.onLine) handleNetworkChange(false);
     }
 
     function initRealtimeSystemAlert() {
@@ -4865,11 +5128,11 @@
           if (overlay) overlay.classList.remove('active');
         }
       }, (error) => {
-        console.warn("Realtime system broadcast listener note:", error.message);
+        console.warn("Realtime broadcast note:", error.message);
       });
     }
 
-    // 8. INITIALIZATION
+    // 9. APP INITIALIZATION
     async function initApp() {
       const loader = document.getElementById('app-global-loader');
 
@@ -4878,7 +5141,7 @@
           try {
             await signInAnonymously(auth);
           } catch (err) {
-            console.error("Anonymous auth initialization error:", err);
+            console.error("Anonymous auth init error:", err);
           }
         } else {
           currentAuthUser = user;
@@ -4905,10 +5168,7 @@
         loader.style.opacity = '0';
         setTimeout(() => loader.style.display = 'none', 300);
 
-        // Start listening for real-time app update / broadcast alerts
         initRealtimeSystemAlert();
-
-        // Start listening for network offline/online changes
         initNetworkMonitor();
       });
     }
@@ -4919,6 +5179,9 @@
       toast: ToastService,
       student: StudentApp,
       admin: AdminApp,
+      openResourceDetail,
+      handleViewFile,
+      handleDownloadFile,
       switchAuthTab,
       togglePasswordVisibility,
       handleStudentLogin,
@@ -4931,7 +5194,6 @@
       logout
     };
 
-    // Run startup
     initApp();
   </script>
  <script src="cordova.js"></script>
