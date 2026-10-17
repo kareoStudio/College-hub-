@@ -4,6 +4,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#f8fafc" id="meta-theme-color" />
+  <script>
+    (function () {
+      try { if (localStorage.getItem('ch_theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}
+      window.toggleTheme = function () {
+        var root = document.documentElement;
+        var toDark = root.getAttribute('data-theme') !== 'dark';
+        if (toDark) root.setAttribute('data-theme', 'dark'); else root.removeAttribute('data-theme');
+        try { localStorage.setItem('ch_theme', toDark ? 'dark' : 'light'); } catch (e) {}
+        var m = document.getElementById('meta-theme-color');
+        if (m) m.setAttribute('content', toDark ? '#0b1220' : '#f8fafc');
+      };
+      try { if (localStorage.getItem('ch_theme') === 'dark') { var m = document.getElementById('meta-theme-color'); if (m) m.setAttribute('content', '#0b1220'); } } catch (e) {}
+    })();
+  </script>
   <title>College Hub - Student Productivity & Learning Platform</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1410,6 +1425,123 @@
 
     .text-center { text-align: center; }
     .mt-4 { margin-top: 16px; }
+  
+    /* ================= THEME TOGGLE BUTTON ================= */
+    .theme-toggle-btn {
+      width: 36px; height: 36px; flex-shrink: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: var(--radius-full);
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .theme-toggle-btn:hover { background: var(--primary-light); color: var(--primary); }
+    .theme-toggle-btn svg { width: 18px; height: 18px; }
+    .theme-toggle-btn .i-sun { display: none; }
+    html[data-theme="dark"] .theme-toggle-btn .i-sun { display: block; }
+    html[data-theme="dark"] .theme-toggle-btn .i-moon { display: none; }
+    .theme-toggle-floating { position: fixed; top: 14px; right: 14px; z-index: 20; }
+
+    /* ================= DEVELOPER WATERMARK ================= */
+    .dev-watermark {
+      margin: 8px auto 0;
+      padding: 14px 16px 8px;
+      text-align: center;
+      font-size: 11.5px;
+      letter-spacing: 0.04em;
+      color: var(--text-light);
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .dev-watermark strong { color: var(--text-muted); font-weight: 700; }
+    .dev-watermark.in-card { margin-top: 10px; padding: 8px 0 0; }
+
+    /* ================= DARK THEME ================= */
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --primary: #3b82f6;
+      --primary-hover: #60a5fa;
+      --primary-light: rgba(59, 130, 246, 0.16);
+      --primary-focus: rgba(59, 130, 246, 0.32);
+      --accent-light: rgba(245, 158, 11, 0.16);
+      --success-light: rgba(16, 185, 129, 0.16);
+      --danger-light: rgba(239, 68, 68, 0.16);
+      --bg-body: #0b1220;
+      --bg-surface: #111a2e;
+      --bg-card: #111a2e;
+      --bg-subtle: #1a2540;
+      --text-main: #e5e9f0;
+      --text-muted: #9aa8bf;
+      --text-light: #6b7a93;
+      --border-color: #243049;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.45), 0 2px 4px -2px rgba(0, 0, 0, 0.35);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+      --shadow-float: 0 20px 25px -5px rgba(0, 0, 0, 0.55), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+    }
+    html[data-theme="dark"] body { background: var(--bg-body); color: var(--text-main); }
+
+    html[data-theme="dark"] .app-sidebar,
+    html[data-theme="dark"] .mobile-bottom-nav,
+    html[data-theme="dark"] .empty-state,
+    html[data-theme="dark"] .modal-card,
+    html[data-theme="dark"] .work-card,
+    html[data-theme="dark"] .announcement-card,
+    html[data-theme="dark"] .search-input-box input,
+    html[data-theme="dark"] .filter-select,
+    html[data-theme="dark"] .homework-item-card,
+    html[data-theme="dark"] .mcq-option,
+    html[data-theme="dark"] .stat-card,
+    html[data-theme="dark"] .data-table-container,
+    html[data-theme="dark"] .role-select-inline,
+    html[data-theme="dark"] .result-score-inner,
+    html[data-theme="dark"] .hw-checkbox,
+    html[data-theme="dark"] .system-alert-modal { background: var(--bg-surface); }
+    html[data-theme="dark"] .system-alert-modal { border-color: var(--border-color); }
+    html[data-theme="dark"] .hw-checkbox.checked { background: var(--primary); }
+
+    html[data-theme="dark"] .top-navbar { background: rgba(17, 26, 46, 0.92); }
+    html[data-theme="dark"] .mobile-bottom-nav { box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.35); }
+    html[data-theme="dark"] .offline-screen { background: var(--bg-body); }
+    html[data-theme="dark"] .offline-icon-ring,
+    html[data-theme="dark"] .system-alert-icon-ring.urgent { background: rgba(239, 68, 68, 0.16); }
+    html[data-theme="dark"] .system-alert-icon-ring { background: rgba(59, 130, 246, 0.16); }
+    html[data-theme="dark"] .offline-status-pill { background: rgba(239, 68, 68, 0.14); border-color: rgba(239, 68, 68, 0.35); }
+    html[data-theme="dark"] .login-container { background: radial-gradient(circle at 10% 10%, #1b2748 0%, #0b1220 90%); }
+    html[data-theme="dark"] .auth-tab-btn.active { background: #243049; color: var(--text-main); }
+    html[data-theme="dark"] .form-label { color: #c3cddd; }
+    html[data-theme="dark"] .file-input-field { background: var(--bg-subtle); }
+    html[data-theme="dark"] .upload-progress-box { border-color: #1e3a8a; }
+    html[data-theme="dark"] .upload-progress-spinner { border-color: #1e3a8a; border-top-color: var(--primary); }
+    html[data-theme="dark"] .switch-slider { background-color: #475569; }
+    html[data-theme="dark"] input:checked + .switch-slider { background-color: var(--primary); }
+
+    html[data-theme="dark"] .badge-role.admin { background: rgba(239, 68, 68, 0.16); color: #f87171; }
+    html[data-theme="dark"] .badge-role.member { background: rgba(16, 185, 129, 0.16); color: #34d399; }
+    html[data-theme="dark"] .badge-amber { color: #fbbf24; }
+    html[data-theme="dark"] .badge-green { color: #34d399; }
+    html[data-theme="dark"] .badge-red { color: #f87171; }
+    html[data-theme="dark"] .badge-purple { background: rgba(168, 85, 247, 0.18); color: #c084fc; }
+    html[data-theme="dark"] .btn-secondary:hover { background: #243049; }
+    html[data-theme="dark"] .skeleton { background: linear-gradient(90deg, #1a2540 25%, #243049 50%, #1a2540 75%); background-size: 200% 100%; }
+    html[data-theme="dark"] .modal-overlay { background: rgba(0, 0, 0, 0.65); }
+
+    html[data-theme="dark"] .work-card:hover { border-color: #3a4a6b; }
+    html[data-theme="dark"] .announcement-card.priority-important { background: rgba(239, 68, 68, 0.08); }
+    html[data-theme="dark"] .homework-item-card.completed { background: var(--bg-subtle); border-color: #3a4a6b; }
+    html[data-theme="dark"] .hw-checkbox { border-color: #64748b; }
+    html[data-theme="dark"] .mcq-option:hover { border-color: #3a4a6b; background: var(--bg-subtle); }
+    html[data-theme="dark"] .mcq-radio { border-color: #475569; }
+    html[data-theme="dark"] .quiz-timer-badge { background: rgba(245, 158, 11, 0.16); color: #fbbf24; }
+    html[data-theme="dark"] .result-score-circle { background: conic-gradient(var(--primary) calc(var(--score-pct) * 1%), #243049 0); }
+    html[data-theme="dark"] .pwd-display-badge { background: var(--bg-subtle); border-color: var(--border-color); color: var(--text-main); }
+
+    /* inline-styled elements */
+    html[data-theme="dark"] .card.admin-only-btn { background: linear-gradient(135deg, #111a2e, #16233f) !important; }
+    html[data-theme="dark"] .card[style*="e2e8f0"] { border-color: var(--border-color) !important; }
+    html[data-theme="dark"] .work-type-icon[style*="eff6ff"] { background: var(--primary-light) !important; }
   </style>
 </head>
 <body>
@@ -1495,6 +1627,11 @@
     <!-- SCREEN 1: LOGIN & SIGNUP -->
     <div id="screen-login" class="screen-view active">
       <div class="login-container">
+        <button type="button" class="theme-toggle-btn theme-toggle-floating" onclick="window.toggleTheme()" aria-label="Toggle dark mode" title="Dark / Light mode">
+                <svg class="i-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                <svg class="i-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+              </button>
+
         <div class="login-card">
           <div class="brand-header">
             <div class="brand-logo-badge" onclick="window.CollegeHubApp.handleLogoSecretTap()" title="College Hub">CH</div>
@@ -1587,6 +1724,7 @@
           <div style="margin-top:18px; text-align:center; font-size:11.5px; color:var(--text-light);">
             Please Provide All Details.
           </div>
+          <div class="dev-watermark in-card">Developed by <strong>Kareo Studio</strong></div>
         </div>
       </div>
     </div>
@@ -1655,6 +1793,10 @@
             <div style="display:flex; align-items:center; gap:8px;">
               <span id="nav-student-course-badge" class="badge badge-blue">Academic</span>
               <button id="btn-top-portal-switch" class="btn-primary btn-sm" style="display:none; padding:4px 10px;" onclick="window.CollegeHubApp.goToAdminPortalDirect()">Staff Portal</button>
+              <button type="button" class="theme-toggle-btn" onclick="window.toggleTheme()" aria-label="Toggle dark mode" title="Dark / Light mode">
+                <svg class="i-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                <svg class="i-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+              </button>
               <button class="btn-secondary btn-sm" onclick="window.CollegeHubApp.logout()" title="Logout">Logout</button>
             </div>
           </header>
@@ -1884,6 +2026,7 @@
             </div>
 
           </div>
+        <div class="dev-watermark">Developed by <strong>Kareo Studio</strong></div>
         </main>
 
         <!-- Mobile Bottom Nav -->
@@ -1977,6 +2120,10 @@
             </div>
             <div style="display:flex; align-items:center; gap:8px;">
               <span id="top-admin-role-badge" class="badge-role admin">Administrator</span>
+              <button type="button" class="theme-toggle-btn" onclick="window.toggleTheme()" aria-label="Toggle dark mode" title="Dark / Light mode">
+                <svg class="i-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                <svg class="i-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+              </button>
               <button class="btn-secondary btn-sm" onclick="window.CollegeHubApp.logout()">Logout</button>
             </div>
           </header>
@@ -2253,6 +2400,7 @@
             </div>
 
           </div>
+        <div class="dev-watermark">Developed by <strong>Kareo Studio</strong></div>
         </main>
 
         <nav class="mobile-bottom-nav">
@@ -2511,6 +2659,76 @@
           </div>
         </div>
         <button type="submit" id="btn-submit-resource" class="btn-primary" style="margin-top:12px;">Publish & Upload to Drive</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Admin Edit Resource -->
+  <div id="modal-edit-resource" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Edit Resource</h3>
+        <button class="modal-close" onclick="window.CollegeHubApp.modal.close('modal-edit-resource')">✕</button>
+      </div>
+      <form onsubmit="event.preventDefault(); window.CollegeHubApp.admin.handleUpdateResource();">
+        <input type="hidden" id="editres-id" />
+        <div class="form-group">
+          <label class="form-label">Title</label>
+          <input type="text" id="editres-title" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Subject</label>
+          <select id="editres-subject" class="form-control" required>
+            <option value="Basic Mathematics">Basic Mathematics</option>
+            <option value="C Programming">C Programming</option>
+            <option value="Principle of Management">Principle of Management</option>
+            <option value="Computer Fundamentals and PC Software">Computer Fundamentals and PC Software</option>
+            <option value="Communication English">Communication English</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Resource Type</label>
+          <select id="editres-type" class="form-control" required>
+            <option value="Daily Work">Daily Work</option>
+            <option value="Assignment">Assignment</option>
+            <option value="Notes">Notes</option>
+            <option value="PDF">PDF</option>
+            <option value="Reference">Reference</option>
+            <option value="PYQ">PYQ (Previous Year Questions)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea id="editres-desc" class="form-control" style="height:70px; padding:8px 12px;" required></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Current File</label>
+          <div id="editres-current-file" style="font-size:13px; font-weight:600; color:var(--text-main); word-break:break-all;">-</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Replace File (optional)</label>
+          <div class="file-input-wrapper">
+            <input type="file" id="editres-fileinput" class="form-control file-input-field" accept="*/*" />
+          </div>
+          <div id="editres-progress-container" class="upload-progress-box">
+            <div class="upload-progress-spinner"></div>
+            <span id="editres-progress-text">Uploading new file to Google Drive...</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Retention Policy</label>
+          <div style="display:flex; gap:16px; margin-top:4px;">
+            <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+              <input type="radio" name="editres-retention" value="temporary" checked />
+              <span>Temporary (90 Days)</span>
+            </label>
+            <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+              <input type="radio" name="editres-retention" value="permanent" />
+              <span>Permanent</span>
+            </label>
+          </div>
+        </div>
+        <button type="submit" id="btn-update-resource" class="btn-primary" style="margin-top:12px;">Save Changes</button>
       </form>
     </div>
   </div>
@@ -2923,6 +3141,15 @@
         });
       },
 
+      async updateResource(resourceId, changes) {
+        await ensureAnonymousAuth();
+        await updateDoc(doc(db, 'resources', resourceId), {
+          ...changes,
+          updatedAt: serverTimestamp()
+        });
+        globalResourcesCache = globalResourcesCache.filter(r => r.id !== resourceId);
+      },
+
       async deleteResource(resourceId, fileId) {
         await ensureAnonymousAuth();
         if (fileId) {
@@ -3305,6 +3532,17 @@
         }, { merge: true });
       }
     };
+
+    // PUSH: tell the notifier to check for new content right after staff publishes
+    ['saveResource', 'saveAnnouncement', 'saveHomework', 'saveQuiz', 'saveSystemAlert'].forEach(name => {
+      const original = DataService[name];
+      if (typeof original !== 'function') return;
+      DataService[name] = async function (...args) {
+        const result = await original.apply(this, args);
+        try { if (window.CHPush) window.CHPush.ping(); } catch (e) {}
+        return result;
+      };
+    });
 
     // SHARED RESOURCE VIEW MODAL CONTROLLER (FOR BOTH PORTALS)
     async function openResourceDetail(id) {
@@ -4214,6 +4452,7 @@
             </td>
             <td style="text-align:right;">
               <button class="btn-secondary btn-sm" onclick="window.CollegeHubApp.openResourceDetail('${res.id}')">View</button>
+              ${isSuperAdmin ? `<button class="btn-secondary btn-sm" onclick="window.CollegeHubApp.admin.openEditResource('${res.id}')">Edit</button>` : ''}
               ${isSuperAdmin ? `<button class="btn-secondary btn-sm" style="color:var(--danger);" onclick="window.CollegeHubApp.admin.promptDeleteResource('${res.id}', '${res.fileId || ''}')">Delete</button>` : ''}
             </td>
           </tr>
@@ -4242,6 +4481,98 @@
             }
           }
         );
+      },
+
+      async openEditResource(id) {
+        if (activeProfile?.role !== 'admin') {
+          ToastService.show('Only admin can edit resources.', 'error');
+          return;
+        }
+        try {
+          const res = await DataService.getResourceById(id);
+          if (!res) {
+            ToastService.show('Resource not found.', 'error');
+            return;
+          }
+          const setSelect = (elId, value) => {
+            const el = document.getElementById(elId);
+            if (![...el.options].some(o => o.value === value)) {
+              el.appendChild(new Option(value, value));
+            }
+            el.value = value;
+          };
+          document.getElementById('editres-id').value = res.id;
+          document.getElementById('editres-title').value = res.title;
+          document.getElementById('editres-desc').value = res.description;
+          setSelect('editres-subject', res.subject);
+          setSelect('editres-type', res.type);
+          document.getElementById('editres-current-file').innerText = res.fileName || '-';
+          const radio = document.querySelector(`input[name="editres-retention"][value="${res.retention === 'Permanent' ? 'permanent' : 'temporary'}"]`);
+          if (radio) radio.checked = true;
+          document.getElementById('editres-fileinput').value = '';
+          document.getElementById('editres-progress-container').style.display = 'none';
+          ModalService.open('modal-edit-resource');
+        } catch (err) {
+          ToastService.show('Unable to open editor: ' + err.message, 'error');
+        }
+      },
+
+      async handleUpdateResource() {
+        if (activeProfile?.role !== 'admin') {
+          ToastService.show('Only admin can edit resources.', 'error');
+          return;
+        }
+        const id = document.getElementById('editres-id').value;
+        if (!id) return;
+        const title = document.getElementById('editres-title').value.trim();
+        const subject = document.getElementById('editres-subject').value;
+        const type = document.getElementById('editres-type').value;
+        const desc = document.getElementById('editres-desc').value.trim();
+        const retention = document.querySelector('input[name="editres-retention"]:checked').value;
+        const fileInput = document.getElementById('editres-fileinput');
+        const newFile = fileInput.files && fileInput.files[0] ? fileInput.files[0] : null;
+
+        const btn = document.getElementById('btn-update-resource');
+        const progressBox = document.getElementById('editres-progress-container');
+        const progressText = document.getElementById('editres-progress-text');
+
+        btn.disabled = true;
+        btn.innerText = 'Saving...';
+
+        try {
+          const changes = { title, subject, type, description: desc, retentionType: retention };
+          let oldFileId = '';
+
+          if (newFile) {
+            progressBox.style.display = 'flex';
+            progressText.innerText = `Uploading "${newFile.name}" to Google Drive...`;
+            const current = await DataService.getResourceById(id);
+            oldFileId = current?.fileId || '';
+            const driveResult = await uploadToGoogleDrive(newFile);
+            changes.fileName = driveResult.fileName || newFile.name;
+            changes.fileUrl = driveResult.viewUrl;
+            changes.downloadUrl = driveResult.downloadUrl;
+            changes.fileId = driveResult.fileId;
+          }
+
+          progressText.innerText = 'Saving changes...';
+          await DataService.updateResource(id, changes);
+
+          if (newFile && oldFileId) {
+            try { await deleteFromGoogleDrive(oldFileId); } catch (driveErr) { console.warn("Old Drive file cleanup warning:", driveErr); }
+          }
+
+          ModalService.close('modal-edit-resource');
+          ToastService.show('Resource updated successfully!', 'success');
+          this.renderResourcesTable();
+          this.renderDashboardStats();
+        } catch (err) {
+          ToastService.show('Update failed: ' + err.message, 'error');
+        } finally {
+          btn.disabled = false;
+          btn.innerText = 'Save Changes';
+          progressBox.style.display = 'none';
+        }
       },
 
       async handleCreateResource() {
@@ -4987,6 +5318,7 @@
       document.querySelectorAll('.screen-view').forEach(s => s.classList.remove('active'));
       const target = document.getElementById(`screen-${screen}`);
       if (target) target.classList.add('active');
+      try { if (window.CHPush) window.CHPush.sync(screen !== 'login'); } catch (e) {}
     }
 
     function logout() {
@@ -5227,5 +5559,102 @@
     initApp();
   </script>
  <script src="cordova.js"></script>
+
+ <script>
+  /* ================= PUSH NOTIFICATIONS (FCM) - Kareo Studio ================= */
+  (function () {
+    // Apps Script web-app URL of PushNotifier (the one ending in /exec).
+    // Leave '' to rely only on the timed check (notification can take up to 5 min).
+    var PUSH_PING_URL = '';
+    var TOPIC = 'all';
+
+    var ready = false, wantSubscribed = null, listening = false, askedPermission = false, pingTimer = null;
+    var noop = function () {};
+
+    function fcm() { return window.FirebasexMessaging || null; }
+    function hasSession() {
+      try { return !!localStorage.getItem('ch_session_profile'); } catch (e) { return false; }
+    }
+
+    function applySubscription() {
+      var f = fcm();
+      if (!f || !ready) return;
+      if (wantSubscribed) {
+        if (!askedPermission) {
+          askedPermission = true;
+          try { f.grantPermission(noop, noop); } catch (e) {}
+        }
+        try { f.subscribe(TOPIC, noop, function (err) { console.warn('FCM subscribe error:', err); }); } catch (e) {}
+      } else {
+        try { f.unsubscribe(TOPIC, noop, noop); } catch (e) {}
+      }
+    }
+
+    function pick(m, keys) {
+      for (var i = 0; i < keys.length; i++) { if (m && m[keys[i]]) return m[keys[i]]; }
+      return '';
+    }
+
+    function goTo(m) {
+      var app = window.CollegeHubApp;
+      if (!app || !hasSession()) return;
+      var adminScreen = document.getElementById('screen-admin');
+      var inAdmin = adminScreen && adminScreen.classList.contains('active');
+      var type = m.type || '';
+      try {
+        if (type === 'resource' && m.id) { app.openResourceDetail(m.id); }
+        else if (!inAdmin && type === 'announcement') { app.student.switchTab('home'); }
+        else if (!inAdmin && type === 'homework') { app.student.switchTab('homework'); }
+        else if (!inAdmin && type === 'quiz') { app.student.switchTab('quiz'); }
+      } catch (e) { console.warn('Push navigation error:', e); }
+    }
+
+    function onMessage(m) {
+      if (!m) return;
+      if (m.tap) {            // user tapped the system notification
+        setTimeout(function () { goTo(m); }, 1200);
+        return;
+      }
+      // app is open: show an in-app toast instead of a system notification
+      var title = pick(m, ['title', 'notification_title']);
+      var body = pick(m, ['body', 'notification_body']);
+      var text = (title + (title && body ? ' - ' : '') + body).trim();
+      if (text && window.CollegeHubApp && window.CollegeHubApp.toast) {
+        try { window.CollegeHubApp.toast.show(text, 'info'); } catch (e) {}
+      }
+    }
+
+    document.addEventListener('deviceready', function () {
+      ready = true;
+      var f = fcm();
+      if (!f) { console.warn('FirebasexMessaging plugin not found (push disabled).'); return; }
+      if (!listening) {
+        listening = true;
+        try { f.onMessageReceived(onMessage, function (err) { console.warn('FCM message error:', err); }); } catch (e) {}
+      }
+      if (wantSubscribed === null) wantSubscribed = hasSession();
+      applySubscription();
+    }, false);
+
+    window.CHPush = {
+      // called from showScreen(): true when a user is logged in
+      sync: function (loggedIn) {
+        wantSubscribed = !!loggedIn;
+        applySubscription();
+      },
+      // called after staff publishes content; waits a moment so several saves are one check
+      ping: function () {
+        if (!PUSH_PING_URL) return;
+        clearTimeout(pingTimer);
+        pingTimer = setTimeout(function () {
+          try {
+            var sep = PUSH_PING_URL.indexOf('?') > -1 ? '&' : '?';
+            fetch(PUSH_PING_URL + sep + 'ping=' + Date.now(), { method: 'GET', mode: 'no-cors', cache: 'no-store' }).catch(noop);
+          } catch (e) {}
+        }, 1500);
+      }
+    };
+  })();
+ </script>
 </body>
 </html>

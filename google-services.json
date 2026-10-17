@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1028614613575",
+    "project_id": "collage-7b65f",
+    "storage_bucket": "collage-7b65f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028614613575:android:e4793dc4807bc8dd1ddf62",
+        "android_client_info": {
+          "package_name": "com.kareostudio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCVQxI41q-JMtORvxcgjOeOxLHiE2WYS4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

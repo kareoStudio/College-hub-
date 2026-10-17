@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.kareostudio" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.kareostudio" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>College Hub</name>
     <description>College Hub - Your one-stop college app</description>
     <author email="dev@kareostudio.com" href="https://kareostudio.com">Kareo Studio</author>
@@ -19,7 +19,7 @@
     <!-- Android SDK versions -->
     <preference name="android-minSdkVersion" value="24" />
     <preference name="android-targetSdkVersion" value="34" />
-    <preference name="android-compileSdkVersion" value="34" />
+    <preference name="android-compileSdkVersion" value="35" />
     <preference name="AndroidXEnabled" value="true" />
     
     <!-- Screen fitting -->
@@ -61,6 +61,8 @@
             <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
             <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
             <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+            <!-- Push notifications (Android 13+ runtime permission) -->
+            <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
         </config-file>
     </platform>
     
