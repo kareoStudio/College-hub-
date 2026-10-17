@@ -36,7 +36,7 @@ jobs:
         run: |
           export ANDROID_HOME=$ANDROID_SDK_ROOT
           yes | sdkmanager --licenses || true
-          sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+          sdkmanager "platform-tools" "platforms;android-34" "platforms;android-35" "build-tools;34.0.0"
       
       - name: Install Gradle 8.0
         run: |
@@ -51,12 +51,26 @@ jobs:
         run: npm install -g cordova
       
       - name: Setup Cordova Project & Copy Files
+        env:
+          GOOGLE_SERVICES_B64: ${{ secrets.GOOGLE_SERVICES_JSON }}
         run: |
           # 1. Create project with matching package name
           cordova create college-hub com.kareostudio "College Hub"
           
           # 2. Copy config.xml and icon
           cp config.xml college-hub/config.xml
+
+          # 2b. Firebase config for push notifications (must exist BEFORE platform add)
+          #     Use GitHub Secret GOOGLE_SERVICES_JSON (base64) or a google-services.json in repo root
+          if [ -n "$GOOGLE_SERVICES_B64" ]; then
+            echo "$GOOGLE_SERVICES_B64" | base64 -d > college-hub/google-services.json
+            echo "google-services.json loaded from secret"
+          elif [ -f google-services.json ]; then
+            cp google-services.json college-hub/google-services.json
+            echo "google-services.json loaded from repo"
+          else
+            echo "WARNING: google-services.json not found - building WITHOUT push notifications"
+          fi
           mkdir -p college-hub/res
           [ -f icon.png ] && cp icon.png college-hub/res/icon.png || echo "icon.png not found, skipping"
           
@@ -75,6 +89,13 @@ jobs:
           cordova plugin add cordova-plugin-filepath
           cordova plugin add cordova-plugin-filechooser
           cordova plugin add cordova-plugin-android-permissions
+
+          # 5. Push notifications (Firebase Cloud Messaging) - only if google-services.json exists
+          if [ -f google-services.json ]; then
+            cordova plugin add cordova-plugin-firebasex-messaging
+          else
+            echo "Skipping push plugin (no google-services.json)"
+          fi
           
           echo "=== www files copied ==="
           ls -la www/
