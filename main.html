@@ -5676,8 +5676,12 @@
           }
         } catch (e) {}
       }
-      if (wantSubscribed === null) wantSubscribed = hasSession();
-      applySubscription();
+      // App khulte hi naye user ke samne popup trigger karega
+      requestAndroidPermission(function() {
+        if (wantSubscribed === null) wantSubscribed = hasSession();
+        applySubscription();
+      });
+
     }, false);
 
     window.CHPush = {
