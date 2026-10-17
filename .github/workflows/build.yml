@@ -102,20 +102,19 @@ jobs:
           # 1. Build release APK
           cordova build android --release -- --packageType=apk
           
-          # 2. Keystore create karna (Signing ke liye)
+          # 2. Keystore create karna
           keytool -genkeypair -v -keystore release.keystore -alias collegehub -keyalg RSA -keysize 2048 -validity 10000 -storepass 123456 -keypass 123456 -dname "CN=CollegeHub, OU=Kareo, O=KareoStudio, L=City, S=State, C=IN"
           
-          # 3. APK ko sign karna
           UNSIGNED_APK="platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk"
+          ALIGNED_APK="platforms/android/app/build/outputs/apk/release/app-aligned.apk"
           SIGNED_APK="platforms/android/app/build/outputs/apk/release/CollegeHub-release.apk"
           
-          # Agar unsigned APK bani hai to sign karo, warna direct release APK lo
-          if [ -f "$UNSIGNED_APK" ]; then
-            jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore release.keystore -storepass 123456 -keypass 123456 "$UNSIGNED_APK" collegehub
-            $ANDROID_SDK_ROOT/build-tools/34.0.0/zipalign -v 4 "$UNSIGNED_APK" "$SIGNED_APK"
-          else
-            cp platforms/android/app/build/outputs/apk/release/app-release.apk "$SIGNED_APK" || true
-          fi
+          # 3. Zipalign pehle karna hota hai
+          $ANDROID_SDK_ROOT/build-tools/34.0.0/zipalign -v -p 4 "$UNSIGNED_APK" "$ALIGNED_APK"
+          
+          # 4. apksigner se modern v2/v3/v4 sign karna (har Android par valid hoga)
+          $ANDROID_SDK_ROOT/build-tools/34.0.0/apksigner sign --ks release.keystore --ks-pass pass:123456 --key-pass pass:123456 --out "$SIGNED_APK" "$ALIGNED_APK"
+
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
