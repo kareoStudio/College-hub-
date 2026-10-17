@@ -5562,7 +5562,7 @@
 
  <script>
   /* ================= PUSH NOTIFICATIONS (FCM) - Kareo Studio ================= */
- (function () {
+(function () {
     // Apps Script web-app URL of PushNotifier (the one ending in /exec).
     // Leave '' to rely only on the timed check (notification can take up to 5 min).
     var PUSH_PING_URL = '';
@@ -5571,7 +5571,6 @@
     var ready = false, wantSubscribed = null, listening = false, askedPermission = false, pingTimer = null;
     var noop = function () {};
 
-    // Dono plugins ko support karega (FirebasexMessaging ya FirebasePlugin)
     function fcm() { 
       return window.FirebasePlugin || window.FirebasexMessaging || null; 
     }
@@ -5580,25 +5579,49 @@
       try { return !!localStorage.getItem('ch_session_profile'); } catch (e) { return false; }
     }
 
+    // Android 13+ Popup mangne ke liye safe function
+    function requestAndroidPermission(done) {
+      if (window.cordova && cordova.plugins && cordova.plugins.permissions) {
+        var permissions = cordova.plugins.permissions;
+        var postNotif = "android.permission.POST_NOTIFICATIONS";
+
+        permissions.checkPermission(postNotif, function (status) {
+          if (!status.hasPermission) {
+            permissions.requestPermission(postNotif, function () {
+              if (done) done();
+            }, function () {
+              if (done) done();
+            });
+          } else {
+            if (done) done();
+          }
+        }, function () {
+          if (done) done();
+        });
+      } else {
+        if (done) done();
+      }
+    }
+
     function applySubscription() {
       var f = fcm();
       if (!f || !ready) return;
       if (wantSubscribed) {
         if (!askedPermission) {
           askedPermission = true;
-          try { 
-            if (f.grantPermission) f.grantPermission(noop, noop); 
-          } catch (e) {}
+          // System popup trigger karega
+          requestAndroidPermission(function () {
+            try { 
+              if (f.subscribe) {
+                f.subscribe(TOPIC, function () {
+                  console.log('FCM subscribed to ' + TOPIC);
+                }, function (err) { 
+                  console.warn('FCM subscribe error:', err); 
+                }); 
+              }
+            } catch (e) {}
+          });
         }
-        try { 
-          if (f.subscribe) {
-            f.subscribe(TOPIC, function() {
-              console.log('FCM subscribed to ' + TOPIC);
-            }, function (err) { 
-              console.warn('FCM subscribe error:', err); 
-            }); 
-          }
-        } catch (e) {}
       } else {
         try { 
           if (f.unsubscribe) f.unsubscribe(TOPIC, noop, noop); 
