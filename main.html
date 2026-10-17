@@ -5562,9 +5562,8 @@
 
  <script>
   /* ================= PUSH NOTIFICATIONS (FCM) - Kareo Studio ================= */
-(function () {
-    // Apps Script web-app URL of PushNotifier (the one ending in /exec).
-    // Leave '' to rely only on the timed check (notification can take up to 5 min).
+
+ (function () {
     var PUSH_PING_URL = '';
     var TOPIC = 'all';
 
@@ -5579,7 +5578,7 @@
       try { return !!localStorage.getItem('ch_session_profile'); } catch (e) { return false; }
     }
 
-    // Android 13+ Popup mangne ke liye safe function
+    // Android 13+ POST_NOTIFICATIONS dialog
     function requestAndroidPermission(done) {
       if (window.cordova && cordova.plugins && cordova.plugins.permissions) {
         var permissions = cordova.plugins.permissions;
@@ -5589,7 +5588,8 @@
           if (!status.hasPermission) {
             permissions.requestPermission(postNotif, function () {
               if (done) done();
-            }, function () {
+            }, function (err) {
+              console.warn("Permission denied or failed:", err);
               if (done) done();
             });
           } else {
@@ -5605,28 +5605,19 @@
 
     function applySubscription() {
       var f = fcm();
-      if (!f || !ready) return;
-      if (wantSubscribed) {
-        if (!askedPermission) {
-          askedPermission = true;
-          // System popup trigger karega
-          requestAndroidPermission(function () {
-            try { 
-              if (f.subscribe) {
-                f.subscribe(TOPIC, function () {
-                  console.log('FCM subscribed to ' + TOPIC);
-                }, function (err) { 
-                  console.warn('FCM subscribe error:', err); 
-                }); 
-              }
-            } catch (e) {}
-          });
+      if (!ready) return;
+
+      requestAndroidPermission(function () {
+        if (wantSubscribed && f && f.subscribe) {
+          try {
+            f.subscribe(TOPIC, function () {
+              console.log('FCM subscribed to ' + TOPIC);
+            }, function (err) {
+              console.warn('FCM subscribe error:', err);
+            });
+          } catch (e) {}
         }
-      } else {
-        try { 
-          if (f.unsubscribe) f.unsubscribe(TOPIC, noop, noop); 
-        } catch (e) {}
-      }
+      });
     }
 
     function pick(m, keys) {
@@ -5650,11 +5641,10 @@
 
     function onMessage(m) {
       if (!m) return;
-      if (m.tap) {            // user tapped the system notification
+      if (m.tap) {
         setTimeout(function () { goTo(m); }, 1200);
         return;
       }
-      // app is open: show an in-app toast instead of a system notification
       var title = pick(m, ['title', 'notification_title']);
       var body = pick(m, ['body', 'notification_body']);
       var text = (title + (title && body ? ' - ' : '') + body).trim();
@@ -5676,21 +5666,27 @@
           }
         } catch (e) {}
       }
-      // App khulte hi naye user ke samne popup trigger karega
-      requestAndroidPermission(function() {
-        if (wantSubscribed === null) wantSubscribed = hasSession();
+
+      wantSubscribed = hasSession();
+
+      // 1.5 second ka delay taake Cordova aur Android bridge fully initialize ho jaye
+      setTimeout(function() {
         applySubscription();
-      });
+      }, 1500);
+
+      // User screen par pehli baar kahin bhi tap kare to bhi dialog trigger ho
+      document.addEventListener('click', function askOnClick() {
+        requestAndroidPermission();
+        document.removeEventListener('click', askOnClick);
+      }, { once: true });
 
     }, false);
 
     window.CHPush = {
-      // called from showScreen(): true when a user is logged in
       sync: function (loggedIn) {
         wantSubscribed = !!loggedIn;
         applySubscription();
       },
-      // called after staff publishes content; waits a moment so several saves are one check
       ping: function () {
         if (!PUSH_PING_URL) return;
         clearTimeout(pingTimer);
