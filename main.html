@@ -5562,7 +5562,7 @@
 
  <script>
   /* ================= PUSH NOTIFICATIONS (FCM) - Kareo Studio ================= */
-  (function () {
+ (function () {
     // Apps Script web-app URL of PushNotifier (the one ending in /exec).
     // Leave '' to rely only on the timed check (notification can take up to 5 min).
     var PUSH_PING_URL = '';
@@ -5571,7 +5571,11 @@
     var ready = false, wantSubscribed = null, listening = false, askedPermission = false, pingTimer = null;
     var noop = function () {};
 
-    function fcm() { return window.FirebasexMessaging || null; }
+    // Dono plugins ko support karega (FirebasexMessaging ya FirebasePlugin)
+    function fcm() { 
+      return window.FirebasePlugin || window.FirebasexMessaging || null; 
+    }
+
     function hasSession() {
       try { return !!localStorage.getItem('ch_session_profile'); } catch (e) { return false; }
     }
@@ -5582,11 +5586,23 @@
       if (wantSubscribed) {
         if (!askedPermission) {
           askedPermission = true;
-          try { f.grantPermission(noop, noop); } catch (e) {}
+          try { 
+            if (f.grantPermission) f.grantPermission(noop, noop); 
+          } catch (e) {}
         }
-        try { f.subscribe(TOPIC, noop, function (err) { console.warn('FCM subscribe error:', err); }); } catch (e) {}
+        try { 
+          if (f.subscribe) {
+            f.subscribe(TOPIC, function() {
+              console.log('FCM subscribed to ' + TOPIC);
+            }, function (err) { 
+              console.warn('FCM subscribe error:', err); 
+            }); 
+          }
+        } catch (e) {}
       } else {
-        try { f.unsubscribe(TOPIC, noop, noop); } catch (e) {}
+        try { 
+          if (f.unsubscribe) f.unsubscribe(TOPIC, noop, noop); 
+        } catch (e) {}
       }
     }
 
@@ -5627,10 +5643,15 @@
     document.addEventListener('deviceready', function () {
       ready = true;
       var f = fcm();
-      if (!f) { console.warn('FirebasexMessaging plugin not found (push disabled).'); return; }
+      if (!f) { console.warn('Firebase plugin not found (push disabled).'); return; }
+      
       if (!listening) {
         listening = true;
-        try { f.onMessageReceived(onMessage, function (err) { console.warn('FCM message error:', err); }); } catch (e) {}
+        try { 
+          if (f.onMessageReceived) {
+            f.onMessageReceived(onMessage, function (err) { console.warn('FCM message error:', err); });
+          }
+        } catch (e) {}
       }
       if (wantSubscribed === null) wantSubscribed = hasSession();
       applySubscription();
@@ -5654,7 +5675,8 @@
         }, 1500);
       }
     };
-  })();
+})();
+
  </script>
 </body>
 </html>
