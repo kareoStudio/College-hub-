@@ -5605,20 +5605,33 @@
 
     function applySubscription() {
       var f = fcm();
-      if (!ready) return;
+      if (!ready || !f) return;
 
       requestAndroidPermission(function () {
-        if (wantSubscribed && f && f.subscribe) {
-          try {
-            f.subscribe(TOPIC, function () {
-              console.log('FCM subscribed to ' + TOPIC);
-            }, function (err) {
-              console.warn('FCM subscribe error:', err);
-            });
-          } catch (e) {}
+        // 1. Pehle FCM Token lena confirm karein
+        if (f.getToken) {
+          f.getToken(function (token) {
+            console.log("FCM Token ready:", token);
+
+            // 2. Token milne ke baad topic subscribe karein
+            if (f.subscribe) {
+              f.subscribe(TOPIC, function () {
+                console.log("Successfully subscribed to topic: " + TOPIC);
+              }, function (err) {
+                console.warn("FCM subscribe error:", err);
+              });
+            }
+          }, function (err) {
+            console.warn("FCM getToken error:", err);
+            // Fallback agar direct subscribe chal jaye
+            if (f.subscribe) { f.subscribe(TOPIC, noop, noop); }
+          });
+        } else if (f.subscribe) {
+          f.subscribe(TOPIC, noop, noop);
         }
       });
     }
+
 
     function pick(m, keys) {
       for (var i = 0; i < keys.length; i++) { if (m && m[keys[i]]) return m[keys[i]]; }
