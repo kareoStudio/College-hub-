@@ -88,7 +88,7 @@ jobs:
 
           # 5. Push notifications plugin
           if [ -f google-services.json ]; then
-            cordova plugin add cordova-plugin-firebasex-messaging
+            cordova plugin add cordova-plugin-firebasex-messaging@1.1.0 --save || cordova plugin add cordova-plugin-firebasex@16.5.0 --save
           else
             echo "Skipping push plugin (no google-services.json)"
           fi
