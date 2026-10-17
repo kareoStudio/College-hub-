@@ -96,29 +96,46 @@ jobs:
           echo "=== www files copied ==="
           ls -la www/
       
-      - name: Build Debug APK
+            - name: Build & Sign Release APK
         run: |
           cd college-hub
-          cordova build android --debug
-      
+          # 1. Build release APK
+          cordova build android --release -- --packageType=apk
+          
+          # 2. Keystore create karna (Signing ke liye)
+          keytool -genkeypair -v -keystore release.keystore -alias collegehub -keyalg RSA -keysize 2048 -validity 10000 -storepass 123456 -keypass 123456 -dname "CN=CollegeHub, OU=Kareo, O=KareoStudio, L=City, S=State, C=IN"
+          
+          # 3. APK ko sign karna
+          UNSIGNED_APK="platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk"
+          SIGNED_APK="platforms/android/app/build/outputs/apk/release/CollegeHub-release.apk"
+          
+          # Agar unsigned APK bani hai to sign karo, warna direct release APK lo
+          if [ -f "$UNSIGNED_APK" ]; then
+            jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore release.keystore -storepass 123456 -keypass 123456 "$UNSIGNED_APK" collegehub
+            $ANDROID_SDK_ROOT/build-tools/34.0.0/zipalign -v 4 "$UNSIGNED_APK" "$SIGNED_APK"
+          else
+            cp platforms/android/app/build/outputs/apk/release/app-release.apk "$SIGNED_APK" || true
+          fi
+
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: College-Hub-APK
-          path: college-hub/platforms/android/app/build/outputs/apk/debug/app-debug.apk
-      
+          name: College-Hub-Release-APK
+          path: college-hub/platforms/android/app/build/outputs/apk/release/CollegeHub-release.apk
+
       - name: Upload to Release
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         uses: softprops/action-gh-release@v2
         with:
-          files: college-hub/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+          files: college-hub/platforms/android/app/build/outputs/apk/release/CollegeHub-release.apk
           tag_name: v1.0.0-${{ github.run_number }}
-          name: College Hub v1.0.0 Build ${{ github.run_number }}
+          name: College Hub v1.0.2 Release ${{ github.run_number }}
           body: |
-            ## College Hub APK
+            ## College Hub Official Release APK
             - App Name: College Hub
             - Package: com.kareostudio
             - Target SDK: 34 (Android 14)
+            - Build Type: Production Release (Signed)
             - Build Date: ${{ github.event.head_commit.timestamp }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
