@@ -28,15 +28,12 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-      
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-      
-      - name: Install Android Build Tools 34.0.0
+
+      - name: Configure Android SDK & Licenses
         run: |
-          export ANDROID_HOME=$ANDROID_SDK_ROOT
-          yes | sdkmanager --licenses || true
-          sdkmanager "platform-tools" "platforms;android-34" "platforms;android-35" "build-tools;34.0.0"
+          echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
+          yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses || true
+          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
       
       - name: Install Gradle 8.0
         run: |
@@ -60,8 +57,7 @@ jobs:
           # 2. Copy config.xml and icon
           cp config.xml college-hub/config.xml
 
-          # 2b. Firebase config for push notifications (must exist BEFORE platform add)
-          #     Use GitHub Secret GOOGLE_SERVICES_JSON (base64) or a google-services.json in repo root
+          # 2b. Firebase config for push notifications
           if [ -n "$GOOGLE_SERVICES_B64" ]; then
             echo "$GOOGLE_SERVICES_B64" | base64 -d > college-hub/google-services.json
             echo "google-services.json loaded from secret"
@@ -74,7 +70,7 @@ jobs:
           mkdir -p college-hub/res
           [ -f icon.png ] && cp icon.png college-hub/res/icon.png || echo "icon.png not found, skipping"
           
-          # 3. Copy index.html and main.html (agar redirect trick use kar rahe ho)
+          # 3. Copy index.html and main.html
           cp index.html college-hub/www/index.html
           [ -f main.html ] && cp main.html college-hub/www/main.html || echo "main.html not present"
           
@@ -90,7 +86,7 @@ jobs:
           cordova plugin add cordova-plugin-filechooser
           cordova plugin add cordova-plugin-android-permissions
 
-          # 5. Push notifications (Firebase Cloud Messaging) - only if google-services.json exists
+          # 5. Push notifications plugin
           if [ -f google-services.json ]; then
             cordova plugin add cordova-plugin-firebasex-messaging
           else
@@ -101,8 +97,6 @@ jobs:
           ls -la www/
       
       - name: Build Debug APK
-        env:
-          ANDROID_HOME: ${{ env.ANDROID_SDK_ROOT }}
         run: |
           cd college-hub
           cordova build android --debug
