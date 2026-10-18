@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="theme-color" content="#f8fafc" id="meta-theme-color" />
   <script>
-    (function () {
+    document.addE(function () {
       try { if (localStorage.getItem('ch_theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}
       window.toggleTheme = function () {
         var root = document.documentElement;
@@ -5669,8 +5669,30 @@
     document.addEventListener('deviceready', function () {
       ready = true;
       var f = fcm();
-      if (!f) { console.warn('Firebase plugin not found (push disabled).'); return; }
-      
+
+      // ================= YAHAN ADD KAREIN (ALERT TEST) =================
+      if (!f) {
+        alert("CRITICAL ERROR: Firebase plugin is NULL!");
+        return;
+      }
+
+      if (f.getToken) {
+        f.getToken(function(token) {
+          alert("Firebase Ready! Token: " + token.substring(0, 8) + "...");
+          if (f.subscribe) {
+            f.subscribe(TOPIC, function() {
+              alert("Subscribed to: " + TOPIC);
+            }, function(e) {
+              alert("Subscribe error: " + JSON.stringify(e));
+            });
+          }
+        }, function(err) {
+          alert("Token Error: " + JSON.stringify(err));
+        });
+      }
+      // =================================================================
+
+      // Uske baad aapka purana channel aur permission wala code chalega...
       if (!listening) {
         listening = true;
         try { 
@@ -5681,11 +5703,12 @@
       }
 
       wantSubscribed = hasSession();
-
-      // 1.5 second ka delay taake Cordova aur Android bridge fully initialize ho jaye
       setTimeout(function() {
         applySubscription();
       }, 1500);
+
+    }, false);
+
 
       // User screen par pehli baar kahin bhi tap kare to bhi dialog trigger ho
       document.addEventListener('click', function askOnClick() {
