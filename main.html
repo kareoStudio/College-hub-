@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="theme-color" content="#f8fafc" id="meta-theme-color" />
   <script>
-    document.addE(function () {
+    (function () {
       try { if (localStorage.getItem('ch_theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}
       window.toggleTheme = function () {
         var root = document.documentElement;
@@ -5580,26 +5580,29 @@
 
     // Android 13+ POST_NOTIFICATIONS dialog
     function requestAndroidPermission(done) {
+      done = done || noop;
+      var f = fcm();
+
+      // 1) Best way: FirebasePlugin handles Android 13+ permission itself
+      if (f && f.hasPermission && f.grantPermission) {
+        f.hasPermission(function (granted) {
+          if (granted) { done(); return; }
+          f.grantPermission(function () { done(); }, function () { done(); });
+        }, function () { done(); });
+        return;
+      }
+
+      // 2) Fallback: cordova-plugin-android-permissions
       if (window.cordova && cordova.plugins && cordova.plugins.permissions) {
         var permissions = cordova.plugins.permissions;
         var postNotif = "android.permission.POST_NOTIFICATIONS";
-
         permissions.checkPermission(postNotif, function (status) {
           if (!status.hasPermission) {
-            permissions.requestPermission(postNotif, function () {
-              if (done) done();
-            }, function (err) {
-              console.warn("Permission denied or failed:", err);
-              if (done) done();
-            });
-          } else {
-            if (done) done();
-          }
-        }, function () {
-          if (done) done();
-        });
+            permissions.requestPermission(postNotif, function () { done(); }, function () { done(); });
+          } else { done(); }
+        }, function () { done(); });
       } else {
-        if (done) done();
+        done();
       }
     }
 
@@ -5666,36 +5669,28 @@
       }
     }
 
+    var DEBUG_PUSH = true; // test ke baad false kar dena
+
     document.addEventListener('deviceready', function () {
       ready = true;
       var f = fcm();
 
-      // ================= YAHAN ADD KAREIN (ALERT TEST) =================
       if (!f) {
-        alert("CRITICAL ERROR: Firebase plugin is NULL!");
+        if (DEBUG_PUSH) alert("Firebase plugin NULL - APK me firebasex plugin nahi laga");
         return;
       }
 
-      if (f.getToken) {
-        f.getToken(function(token) {
-          alert("Firebase Ready! Token: " + token.substring(0, 8) + "...");
-          if (f.subscribe) {
-            f.subscribe(TOPIC, function() {
-              alert("Subscribed to: " + TOPIC);
-            }, function(e) {
-              alert("Subscribe error: " + JSON.stringify(e));
-            });
-          }
-        }, function(err) {
+      if (DEBUG_PUSH && f.getToken) {
+        f.getToken(function (token) {
+          alert("FCM token OK: " + String(token).substring(0, 10) + "...");
+        }, function (err) {
           alert("Token Error: " + JSON.stringify(err));
         });
       }
-      // =================================================================
 
-      // Uske baad aapka purana channel aur permission wala code chalega...
       if (!listening) {
         listening = true;
-        try { 
+        try {
           if (f.onMessageReceived) {
             f.onMessageReceived(onMessage, function (err) { console.warn('FCM message error:', err); });
           }
@@ -5703,19 +5698,15 @@
       }
 
       wantSubscribed = hasSession();
-      setTimeout(function() {
-        applySubscription();
-      }, 1500);
 
-    }, false);
+      // App khulte hi permission popup + token + topic subscribe
+      setTimeout(function () { applySubscription(); }, 1000);
 
-
-      // User screen par pehli baar kahin bhi tap kare to bhi dialog trigger ho
+      // Backup: agar popup miss ho gaya to pehle tap par dubara try
       document.addEventListener('click', function askOnClick() {
         requestAndroidPermission();
         document.removeEventListener('click', askOnClick);
       }, { once: true });
-
     }, false);
 
     window.CHPush = {
