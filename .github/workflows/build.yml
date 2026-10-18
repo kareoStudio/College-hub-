@@ -99,20 +99,20 @@ jobs:
       - name: Build & Sign Release APK
         run: |
           cd college-hub
-          # 1. Release APK build karo
           cordova build android --release -- --packageType=apk
+          
+          keytool -genkeypair -v -keystore release.keystore -alias collegehub -keyalg RSA -keysize 2048 -validity 10000 -storepass 123456 -keypass 123456 -dname "CN=CollegeHub, OU=Kareo, O=KareoStudio, L=City, S=State, C=IN"
           
           UNSIGNED_APK="platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk"
           ALIGNED_APK="platforms/android/app/build/outputs/apk/release/app-aligned.apk"
           SIGNED_APK="platforms/android/app/build/outputs/apk/release/CollegeHub-release.apk"
           
-          # 2. Standard constant debug keystore se sign karo (jisse Firebase tokens kabhi drop nahi hote)
-          if [ -f "$UNSIGNED_APK" ]; then
-            $ANDROID_SDK_ROOT/build-tools/34.0.0/zipalign -v -p 4 "$UNSIGNED_APK" "$ALIGNED_APK"
-            $ANDROID_SDK_ROOT/build-tools/34.0.0/apksigner sign --ks ~/.android/debug.keystore --ks-pass pass:android --key-pass pass:android --out "$SIGNED_APK" "$ALIGNED_APK"
-          else
-            cp platforms/android/app/build/outputs/apk/release/app-release.apk "$SIGNED_APK" || true
-          fi
+          $ANDROID_SDK_ROOT/build-tools/34.0.0/zipalign -v -p 4 "$UNSIGNED_APK" "$ALIGNED_APK"
+          $ANDROID_SDK_ROOT/build-tools/34.0.0/apksigner sign --ks release.keystore --ks-pass pass:123456 --key-pass pass:123456 --out "$SIGNED_APK" "$ALIGNED_APK"
+          
+          # Ye verify karega aur sign confirm karega
+          $ANDROID_SDK_ROOT/build-tools/34.0.0/apksigner verify -v "$SIGNED_APK"
+
 
 
       - name: Upload APK Artifact
