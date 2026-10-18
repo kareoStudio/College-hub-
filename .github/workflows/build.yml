@@ -96,12 +96,19 @@ jobs:
           echo "=== www files copied ==="
           ls -la www/
   
-      - name: Build & Sign Release APK
+      - name: Prepare and Build Release APK
         run: |
           cd college-hub
+          
+          # 1. google-services.json ko correct native Android location par copy karein
+          mkdir -p platforms/android/app
+          cp google-services.json platforms/android/app/google-services.json || true
+          cp google-services.json platforms/android/google-services.json || true
+          
+          # 2. Release APK build karein
           cordova build android --release -- --packageType=apk
           
-          # Keystore create karein
+          # Keystore aur Signing
           keytool -genkeypair -v -keystore release.keystore -alias collegehub -keyalg RSA -keysize 2048 -validity 10000 -storepass 123456 -keypass 123456 -dname "CN=CollegeHub, OU=Kareo, O=KareoStudio, L=Bareilly, S=UP, C=IN"
           
           UNSIGNED_APK="platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk"
@@ -111,10 +118,8 @@ jobs:
           $ANDROID_SDK_ROOT/build-tools/34.0.0/zipalign -v -p 4 "$UNSIGNED_APK" "$ALIGNED_APK"
           $ANDROID_SDK_ROOT/build-tools/34.0.0/apksigner sign --ks release.keystore --ks-pass pass:123456 --key-pass pass:123456 --out "$SIGNED_APK" "$ALIGNED_APK"
           
-          # Is build ka exact SHA-1 terminal par print karein
-          echo "==================== IS BUILD KA SHA-1 ===================="
+          # SHA-1 print
           keytool -list -v -keystore release.keystore -alias collegehub -storepass 123456 | grep "SHA1:"
-          echo "==========================================================="
 
 
 
