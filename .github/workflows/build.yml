@@ -114,6 +114,8 @@ jobs:
           
           # 4. apksigner se modern v2/v3/v4 sign karna (har Android par valid hoga)
           $ANDROID_SDK_ROOT/build-tools/34.0.0/apksigner sign --ks release.keystore --ks-pass pass:123456 --key-pass pass:123456 --out "$SIGNED_APK" "$ALIGNED_APK"
+            # === YE LINE APKA SHA-1 AUR SHA-256 PRINT KAREGI ===
+          $ANDROID_SDK_ROOT/build-tools/34.0.0/apksigner verify --print-certs "$SIGNED_APK"
 
 
       - name: Upload APK Artifact
