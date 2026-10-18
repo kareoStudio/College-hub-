@@ -88,7 +88,12 @@ jobs:
           cordova plugin add cordova-plugin-android-permissions
 
           # 5. Push notifications plugin
-          cordova plugin add cordova-plugin-firebasex --save
+          # v20 wrapper is currently broken (core@1 vs core@2 conflict) -> use stable monolithic v19
+          cordova plugin add "cordova-plugin-firebasex@^19.0.0" --save || {
+            echo "v19 failed, falling back to 18.0.7"
+            cordova plugin rm cordova-plugin-firebasex || true
+            cordova plugin add cordova-plugin-firebasex@18.0.7 --save
+          }
           echo "=== Installed plugins ==="
           cordova plugin ls
           cordova plugin ls | grep -q "firebasex" || { echo "::error::firebasex plugin missing"; exit 1; }
