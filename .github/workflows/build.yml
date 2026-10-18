@@ -33,15 +33,15 @@ jobs:
         run: |
           echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
           yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses || true
-          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-34" "platforms;android-35" "build-tools;34.0.0" "build-tools;35.0.0"
       
-      - name: Install Gradle 8.0
+      - name: Install Gradle 8.14.2
         run: |
           sudo rm -rf /usr/share/gradle-*
-          wget -q https://services.gradle.org/distributions/gradle-8.0-bin.zip
-          unzip -q gradle-8.0-bin.zip
-          sudo mv gradle-8.0 /opt/gradle-8.0
-          sudo ln -sf /opt/gradle-8.0/bin/gradle /usr/local/bin/gradle
+          wget -q https://services.gradle.org/distributions/gradle-8.14.2-bin.zip
+          unzip -q gradle-8.14.2-bin.zip
+          sudo mv gradle-8.14.2 /opt/gradle-8.14.2
+          sudo ln -sf /opt/gradle-8.14.2/bin/gradle /usr/local/bin/gradle
           gradle --version
       
       - name: Install Cordova
@@ -65,7 +65,8 @@ jobs:
             cp google-services.json college-hub/google-services.json
             echo "google-services.json loaded from repo"
           else
-            echo "WARNING: google-services.json not found - building WITHOUT push notifications"
+            echo "::error::google-services.json NOT FOUND. Add secret GOOGLE_SERVICES_JSON (base64) or commit google-services.json in repo root."
+            exit 1
           fi
           mkdir -p college-hub/res
           [ -f icon.png ] && cp icon.png college-hub/res/icon.png || echo "icon.png not found, skipping"
@@ -75,7 +76,7 @@ jobs:
           [ -f main.html ] && cp main.html college-hub/www/main.html || echo "main.html not present"
           
           cd college-hub
-          cordova platform add android@13.0.0
+          cordova platform add android@14.0.0
           
           # 4. Plugins required for College Hub
           cordova plugin add cordova-plugin-inappbrowser
@@ -87,16 +88,18 @@ jobs:
           cordova plugin add cordova-plugin-android-permissions
 
           # 5. Push notifications plugin
-          if [ -f google-services.json ]; then
-            cordova plugin add cordova-plugin-firebasex --save
-          else
-            echo "Skipping push plugin (no google-services.json)"
-          fi
+          cordova plugin add cordova-plugin-firebasex --save
+          echo "=== Installed plugins ==="
+          cordova plugin ls
+          cordova plugin ls | grep -q "firebasex" || { echo "::error::firebasex plugin missing"; exit 1; }
           
           echo "=== www files copied ==="
           ls -la www/
   
       - name: Prepare and Build Release APK
+        env:
+          KEYSTORE_B64: ${{ secrets.KEYSTORE_B64 }}
+          KEYSTORE_PASS: ${{ secrets.KEYSTORE_PASS }}
         run: |
           cd college-hub
           
@@ -109,17 +112,25 @@ jobs:
           cordova build android --release -- --packageType=apk
           
           # Keystore aur Signing
-          keytool -genkeypair -v -keystore release.keystore -alias collegehub -keyalg RSA -keysize 2048 -validity 10000 -storepass 123456 -keypass 123456 -dname "CN=CollegeHub, OU=Kareo, O=KareoStudio, L=Bareilly, S=UP, C=IN"
+          if [ -n "$KEYSTORE_B64" ] && [ -n "$KEYSTORE_PASS" ]; then
+            echo "$KEYSTORE_B64" | base64 -d > release.keystore
+            STOREPASS="$KEYSTORE_PASS"
+            echo "Using fixed keystore from secrets"
+          else
+            echo "WARNING: no KEYSTORE secrets - generating a temporary keystore (APK signature will change every build)"
+            STOREPASS="123456"
+            keytool -genkeypair -v -keystore release.keystore -alias collegehub -keyalg RSA -keysize 2048 -validity 10000 -storepass "$STOREPASS" -keypass "$STOREPASS" -dname "CN=CollegeHub, OU=Kareo, O=KareoStudio, L=Bareilly, S=UP, C=IN"
+          fi
           
           UNSIGNED_APK="platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk"
           ALIGNED_APK="platforms/android/app/build/outputs/apk/release/app-aligned.apk"
           SIGNED_APK="platforms/android/app/build/outputs/apk/release/CollegeHub-release.apk"
           
-          $ANDROID_SDK_ROOT/build-tools/34.0.0/zipalign -v -p 4 "$UNSIGNED_APK" "$ALIGNED_APK"
-          $ANDROID_SDK_ROOT/build-tools/34.0.0/apksigner sign --ks release.keystore --ks-pass pass:123456 --key-pass pass:123456 --out "$SIGNED_APK" "$ALIGNED_APK"
+          $ANDROID_SDK_ROOT/build-tools/35.0.0/zipalign -v -p 4 "$UNSIGNED_APK" "$ALIGNED_APK"
+          $ANDROID_SDK_ROOT/build-tools/35.0.0/apksigner sign --ks release.keystore --ks-pass pass:"$STOREPASS" --key-pass pass:"$STOREPASS" --out "$SIGNED_APK" "$ALIGNED_APK"
           
           # SHA-1 print
-          keytool -list -v -keystore release.keystore -alias collegehub -storepass 123456 | grep "SHA1:"
+          keytool -list -v -keystore release.keystore -alias collegehub -storepass "$STOREPASS" | grep "SHA1:"
 
 
 
